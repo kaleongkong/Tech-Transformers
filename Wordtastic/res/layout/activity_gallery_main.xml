@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Wordtastic_MainActivity" >
+
+    <TextView
+        android:id="@+id/gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:text="Gallery"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+    <ScrollView
+        android:id="@+id/deckScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="44dp"
+        android:layout_toLeftOf="@+id/textView1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            <ImageButton
+		        android:id="@+id/imageButton1"
+		        android:layout_width="130dp"
+		        android:layout_height="130dp"
+		        android:layout_alignLeft="@+id/deckname"
+		        android:layout_alignTop="@+id/deckScrollView"
+		        android:cropToPadding="true"
+		        android:scaleType="centerCrop"
+		        android:src="@drawable/dolphins" />
+        </LinearLayout>
+    </ScrollView>
+
+    
+
+    <TextView
+        android:id="@+id/deckname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deckScrollView"
+        android:layout_alignRight="@+id/gallery"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="28dp"
+        android:text="Default Deck" />
+
+    <Button
+        android:id="@+id/galleryplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deckScrollView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:onClick="onClickPlay"
+        android:text="PLAY" />
+
+    <Button
+        android:id="@+id/editdeck"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newdeck"
+        android:layout_alignBottom="@+id/newdeck"
+        android:layout_marginLeft="18dp"
+        android:onClick = "onClickEditDeck"
+        android:text="edit deck" />
+
+    <Button
+        android:id="@+id/newdeck"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/galleryplay"
+        android:layout_marginRight="18dp"
+        android:onClick = "onClickNewDeck"
+        android:text="new deck" />
+
+</RelativeLayout>
