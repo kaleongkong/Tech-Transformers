@@ -98,7 +98,6 @@ public class GamePlayActivity extends Activity{
 								timer.setText(minite+":"+second);
 							}else{
 								exitGamePlay();
-								Running = false;
 							}
 						}
 					});
@@ -115,10 +114,10 @@ public class GamePlayActivity extends Activity{
 		return new BitmapDrawable(getResources(), resized);
 	}
 	public void settingUp(){
-		images.add(getResources().getDrawable(R.drawable.dolphins));
-		images.add(getResources().getDrawable(R.drawable.lion_600x450));
-		vocab_dict.add("dolphin");
-		vocab_dict.add("lion");
+		images.add(getResources().getDrawable(R.drawable.tree));
+		images.add(getResources().getDrawable(R.drawable.cow));
+		vocab_dict.add("tree");
+		vocab_dict.add("cow");
 	}
 	public void onClickTryAgain(View v){
 		iv.setImageDrawable(currentimg);
@@ -156,7 +155,7 @@ public class GamePlayActivity extends Activity{
 			iv.setImageDrawable(currentimg);
 			ques_num.setText("Question"+next);
 		}else{
-			Running = false;
+			
 			exitGamePlay();
 		}
 		
@@ -166,6 +165,7 @@ public class GamePlayActivity extends Activity{
 		i.putExtra("score", score);
 		i.putExtra("timeused", timelimit-time);
 		resetData();
+		Running = false;
 		startActivity(i);
 	}
 	private void resetData(){

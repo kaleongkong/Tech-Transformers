@@ -14,4 +14,8 @@ public class GalleryActivity extends Activity{
 		Intent i = new Intent(this, ChooseGameMode.class);
 		startActivity(i);
 	}
+	public void onClickEditDeck(View v){
+		Intent i = new Intent(this, AddActivity.class);
+		startActivity(i);
+	}
 }

@@ -62,7 +62,7 @@
         android:layout_below="@+id/gameplaystats_restart"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
-        android:onClick="Home"
+        android:onClick="onClickHome"
         android:text="Home" />
 
 </RelativeLayout>

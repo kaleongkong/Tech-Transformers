@@ -18,29 +18,53 @@
         android:text="Gallery"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 	
-    <ScrollView
+    <HorizontalScrollView
         android:id="@+id/deckScrollView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="44dp"
-        android:layout_toLeftOf="@+id/textView1" >
+        android:layout_centerVertical="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
             <ImageButton
 		        android:id="@+id/imageButton1"
 		        android:layout_width="130dp"
 		        android:layout_height="130dp"
-		        android:layout_alignLeft="@+id/deckname"
-		        android:layout_alignTop="@+id/deckScrollView"
+		        android:cropToPadding="true"
+		        android:scaleType="centerCrop"
+		        android:src="@drawable/tree" />
+            <ImageButton
+		        android:id="@+id/imageButton2"
+		        android:layout_width="130dp"
+		        android:layout_height="130dp"
 		        android:cropToPadding="true"
 		        android:scaleType="centerCrop"
 		        android:src="@drawable/dolphins" />
+            <ImageButton
+		        android:id="@+id/imageButton3"
+		        android:layout_width="130dp"
+		        android:layout_height="130dp"
+		        android:cropToPadding="true"
+		        android:scaleType="centerCrop"
+		        android:src="@drawable/cow" />
+            <ImageButton
+		        android:id="@+id/imageButton4"
+		        android:layout_width="130dp"
+		        android:layout_height="130dp"
+		        android:cropToPadding="true"
+		        android:scaleType="centerCrop"
+		        android:src="@drawable/table" />
+            <ImageButton
+		        android:id="@+id/imageButton5"
+		        android:layout_width="130dp"
+		        android:layout_height="130dp"
+		        android:cropToPadding="true"
+		        android:scaleType="centerCrop"
+		        android:src="@drawable/baldeagle600x450" />
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
 
     
 

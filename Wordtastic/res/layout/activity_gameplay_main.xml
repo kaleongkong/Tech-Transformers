@@ -82,6 +82,7 @@
         android:layout_below="@+id/time"
         android:layout_centerHorizontal="true"
         android:text="Try Again"
+        android:onClick="onClickTryAgain"
         android:visibility="gone" />
 
 </RelativeLayout>
