@@ -25,4 +25,13 @@
         android:layout_marginBottom="36dp"
         android:text="Take Picture!" />
 
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="&lt; Back" />
+
 </RelativeLayout>

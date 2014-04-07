@@ -47,4 +47,12 @@
         android:onClick="onClickTimeChallenge"
         android:text="Time Challenge" />
 
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="&lt; Back" />
+
 </RelativeLayout>

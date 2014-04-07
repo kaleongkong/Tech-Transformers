@@ -12,7 +12,7 @@ public class Wordtastic_MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_wordtastic__main);
+		setContentView(R.layout.activity_wordtastic_main);
 		play = (Button)findViewById(R.id.play);
 	}
 	public void onClickPlay(View v){
