@@ -12,7 +12,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,16 +30,20 @@ public class GamePlayActivity extends Activity{
 	TextView timer;
 	TextView scoreView;
 	ArrayList<Drawable> images;
-	HashMap<Integer, String> vocab_dict;
+	ArrayList<String> results;
+	ArrayList<String> vocab_dict;
 	Drawable checkmark;
 	Drawable crossmark;
 	Drawable currentimg;
 	String currentans;
+	//***** voice input
+	static final int check = 1111;
+	//*****
 	//*****for timer
 	boolean Running = true;
 	Runnable runnable;
 	Handler handler;
-	int timelimit=5;
+	int timelimit=30;
 	int time;
 	Thread thread;
 	//*******
@@ -62,7 +68,8 @@ public class GamePlayActivity extends Activity{
 		scoreView = (TextView) findViewById(R.id.score);
 		score = 0;
 		images = new ArrayList<Drawable>();
-		vocab_dict = new HashMap<Integer, String>();
+		results = new ArrayList<String>();
+		vocab_dict = new ArrayList<String>();
 		checkmark = scaleDrawable(R.drawable.greencheckmark, 400, 400);
 		crossmark = scaleDrawable(R.drawable.redcrossmark, 400,400);
 		settingUp();
@@ -110,17 +117,8 @@ public class GamePlayActivity extends Activity{
 	public void settingUp(){
 		images.add(getResources().getDrawable(R.drawable.dolphins));
 		images.add(getResources().getDrawable(R.drawable.lion_600x450));
-		vocab_dict.put(R.drawable.dolphins, "dolphin");
-		vocab_dict.put(R.drawable.lion_600x450,"lion");
-	}
-	
-	public void onClickVoiceInput (View v){
-		if(checkAnswer(currentans)){
-			updateResult(checkmark, true);
-		}else{
-			updateResult(crossmark, false);
-			tryagain.setVisibility(View.VISIBLE);
-		}
+		vocab_dict.add("dolphin");
+		vocab_dict.add("lion");
 	}
 	public void onClickTryAgain(View v){
 		iv.setImageDrawable(currentimg);
@@ -128,7 +126,11 @@ public class GamePlayActivity extends Activity{
 		voice.setVisibility(View.VISIBLE);
 	}
 	
+	
+	
+	
 	private void updateResult(Drawable indicator, boolean result){
+		
 		LayerDrawable ld = new LayerDrawable(new Drawable[]{currentimg, indicator});
 		iv.setImageDrawable(ld);
 		if(images.indexOf(currentimg)==images.size()-1){
@@ -170,8 +172,43 @@ public class GamePlayActivity extends Activity{
 		time = timelimit;
 		score = 0;
 	}
-	public boolean checkAnswer(String ans){
-		return true;
+	
+	//****Voice Input***
+	public void onClickVoiceInput (View v){
+		
+		checkAnswer();
+	}
+	public void checkAnswer(){
+		if(results == null || results.size()==0){
+			Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH );
+			i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			i.putExtra(RecognizerIntent.EXTRA_PROMPT, "What is in the Picture?!");
+			startActivityForResult(i, check);
+		}
+		
+		
+		//**
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode == check && resultCode == RESULT_OK){
+			results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+		boolean b = false;
+		int pos = images.indexOf(currentimg);
+		for(String s: results){
+			if(s.equals(vocab_dict.get(pos))){
+				b = true;
+			}
+		}
+		results=new ArrayList<String>();
+		if(b){
+			updateResult(checkmark, true);
+		}else{
+			updateResult(crossmark, false);
+			tryagain.setVisibility(View.VISIBLE);
+		}
+		
 	}
 
 }
