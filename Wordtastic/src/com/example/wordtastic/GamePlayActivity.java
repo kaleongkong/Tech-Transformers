@@ -148,16 +148,18 @@ public class GamePlayActivity extends Activity{
 	}
 	public void onClickSkip(View v){
 		String state = skip.getText().toString();
+		
 		incorrecttext.setVisibility(View.GONE);
 		if(state.equals("Next")){
 			voice.setVisibility(View.VISIBLE);
 			tryagain.setVisibility(View.GONE);
+			skip.setText("Skip");
 		}
 		int next = images.indexOf(currentimg)+1;
+		ques_num.setText("Question"+new Integer(next+1).toString());
 		if(next<images.size()){
 			currentimg = images.get(next);
 			iv.setImageDrawable(currentimg);
-			ques_num.setText("Question"+next);
 		}else{
 			
 			exitGamePlay();
@@ -216,6 +218,7 @@ public class GamePlayActivity extends Activity{
 			tryagain.setVisibility(View.VISIBLE);
 			incorrecttext.setVisibility(View.VISIBLE);
 			incorrecttext.setText("It sounded like: "+ firstword);
+			skip.setText("Skip");
 		}
 		
 	}

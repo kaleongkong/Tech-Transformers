@@ -23,7 +23,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
-        android:text="Take Picture!" />
+        android:text="Take Picture!"
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/button1"

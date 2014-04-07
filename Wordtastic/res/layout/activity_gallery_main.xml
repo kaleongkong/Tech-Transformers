@@ -16,7 +16,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp"
         android:text="Gallery"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp" />
 	
     <HorizontalScrollView
         android:id="@+id/deckScrollView"
@@ -66,18 +67,6 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    
-
-    <TextView
-        android:id="@+id/deckname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/deckScrollView"
-        android:layout_alignRight="@+id/gallery"
-        android:layout_marginBottom="14dp"
-        android:layout_marginRight="28dp"
-        android:text="Default Deck" />
-
     <Button
         android:id="@+id/galleryplay"
         android:layout_width="wrap_content"
@@ -86,29 +75,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:onClick="onClickPlay"
-        android:text="PLAY" />
-
-    <Button
-        android:id="@+id/editdeck"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/newdeck"
-        android:layout_alignBottom="@+id/newdeck"
-        android:layout_marginLeft="18dp"
-        android:onClick = "onClickEditDeck"
-        android:text="edit deck" />
-
-    <Button
-        android:id="@+id/newdeck"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/galleryplay"
-        android:layout_marginRight="18dp"
-        android:onClick = "onClickNewDeck"
-        android:text="new deck" />
+        android:text="START GAME"
+        android:textSize="20sp" 
+        />
 
     <Button
         android:id="@+id/button1"
@@ -118,5 +87,34 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="&lt; Back" />
+
+    <Button
+        android:id="@+id/newdeck"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickNewDeck"
+        android:text="new deck" />
+
+    <Button
+        android:id="@+id/editdeck"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClickEditDeck"
+        android:text="edit deck" />
+
+    <TextView
+        android:id="@+id/deckname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deckScrollView"
+        android:layout_alignParentLeft="true"
+        android:text="Current Deck: Default"
+        android:textSize="15sp" />
 
 </RelativeLayout>

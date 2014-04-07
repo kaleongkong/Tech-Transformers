@@ -23,7 +23,7 @@ public class GamePlayStatsActivity extends Activity{
 		score.setText("Score: "+getIntent().getExtras().getInt("score"));
 	}
 	public void onClickRestart(View v){
-		Intent i = new Intent(this, ChooseGameMode.class);
+		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
 	}
 	public void onClickHome(View v){

@@ -19,7 +19,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="37dp"
         android:layout_toRightOf="@+id/name"
-        android:text="Confirm" />
+        android:text="Confirm"
+        android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -27,16 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button1"
         android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tree"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
-        android:text="Edit Card"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/editText1"
@@ -54,5 +45,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="&lt; Back" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tree"
+        android:layout_centerHorizontal="true"
+        android:text="Edit Card"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp" />
 
 </RelativeLayout>

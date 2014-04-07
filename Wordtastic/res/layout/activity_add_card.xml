@@ -22,15 +22,6 @@
         android:onClick="onClickTakePicture"
         android:text="Take a Picture" />
 
-    <TextView
-        android:id="@+id/add_new_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/take_pic"
-        android:paddingTop="50dp"
-        android:text="Add New Card"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
@@ -39,5 +30,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="&lt; Back" />
+
+    <TextView
+        android:id="@+id/add_new_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Add New Card"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="35sp" />
 
 </RelativeLayout>
