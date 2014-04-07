@@ -29,6 +29,7 @@ public class GamePlayActivity extends Activity{
 	TextView ques_num;
 	TextView timer;
 	TextView scoreView;
+	TextView incorrecttext;
 	ArrayList<Drawable> images;
 	ArrayList<String> results;
 	ArrayList<String> vocab_dict;
@@ -58,6 +59,7 @@ public class GamePlayActivity extends Activity{
 		tryagain = (Button) findViewById(R.id.tryagain);
 		iv = (ImageView) findViewById(R.id.imageView);
 		ques_num = (TextView) findViewById(R.id.ques_num);
+		incorrecttext = (TextView) findViewById(R.id.incorrecttext);
 		//*** timer
 		timer = (TextView) findViewById(R.id.time);
 		time = timelimit;
@@ -123,6 +125,7 @@ public class GamePlayActivity extends Activity{
 		iv.setImageDrawable(currentimg);
 		tryagain.setVisibility(View.GONE);
 		voice.setVisibility(View.VISIBLE);
+		incorrecttext.setVisibility(View.GONE);
 	}
 	
 	
@@ -145,6 +148,7 @@ public class GamePlayActivity extends Activity{
 	}
 	public void onClickSkip(View v){
 		String state = skip.getText().toString();
+		incorrecttext.setVisibility(View.GONE);
 		if(state.equals("Next")){
 			voice.setVisibility(View.VISIBLE);
 			tryagain.setVisibility(View.GONE);
@@ -196,17 +200,22 @@ public class GamePlayActivity extends Activity{
 		super.onActivityResult(requestCode, resultCode, data);
 		boolean b = false;
 		int pos = images.indexOf(currentimg);
+		String firstword = null;
 		for(String s: results){
+			firstword = results.get(0);
 			if(s.equals(vocab_dict.get(pos))){
 				b = true;
 			}
 		}
+		
 		results=new ArrayList<String>();
 		if(b){
 			updateResult(checkmark, true);
 		}else{
 			updateResult(crossmark, false);
 			tryagain.setVisibility(View.VISIBLE);
+			incorrecttext.setVisibility(View.VISIBLE);
+			incorrecttext.setText("It sounded like: "+ firstword);
 		}
 		
 	}

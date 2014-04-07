@@ -13,7 +13,7 @@ public class AddActivity extends Activity {
         setContentView(R.layout.activity_add);
     }
     public void onClickAddNew(View v){
-    	Intent i = new Intent(this, addpic3.class);
+    	Intent i = new Intent(this, AddCardActivity.class);
     	startActivity(i);
     }
 

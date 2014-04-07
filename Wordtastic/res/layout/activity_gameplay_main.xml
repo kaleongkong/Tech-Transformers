@@ -54,7 +54,8 @@
         android:layout_alignBottom="@+id/score"
         android:layout_alignLeft="@+id/imageView"
         android:text="00:00"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/score"
@@ -64,7 +65,8 @@
         android:layout_alignRight="@+id/skip"
         android:layout_marginBottom="19dp"
         android:text="Score: 0/0"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="20dp" />
 
     <ImageButton
         android:id="@+id/soundinput"
@@ -83,6 +85,16 @@
         android:layout_centerHorizontal="true"
         android:text="Try Again"
         android:onClick="onClickTryAgain"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/incorrecttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignRight="@+id/ques_num"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:visibility="gone" />
 
 </RelativeLayout>

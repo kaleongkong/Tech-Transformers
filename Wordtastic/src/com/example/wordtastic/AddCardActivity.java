@@ -14,7 +14,8 @@ public class AddCardActivity extends Activity {
 	}
 
 	public void onClickTakePicture(View v){
-		Intent i = new Intent(this, addpic3.class);
+		Intent i = new Intent(this, CameraPreview.class);
+		startActivity(i);
 	}
 
 }
