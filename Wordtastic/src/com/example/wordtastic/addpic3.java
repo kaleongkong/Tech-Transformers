@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class addpic3<MainActivity> extends Activity {
 
@@ -14,14 +15,20 @@ public class addpic3<MainActivity> extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic3);
-		
+		Button back = (Button) findViewById(R.id.button3);
+		TextView title = (TextView) findViewById(R.id.textView2);
 		Button goNext= (Button) findViewById(R.id.button2);
+		Button retake = (Button) findViewById(R.id.back);
 		goNext.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){ 
 	            Intent n = new Intent(addpic3.this,addpic4.class);
 	            startActivity(n);
 	        }
 			});
+		FontModifier.initTypeface(getAssets(), back);
+		FontModifier.initTypeface(getAssets(), title);
+		FontModifier.initTypeface(getAssets(), goNext);
+		FontModifier.initTypeface(getAssets(), retake);
 	}
 
 	@Override

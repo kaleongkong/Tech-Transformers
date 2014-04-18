@@ -24,14 +24,14 @@
         android:id="@+id/button2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
+        android:layout_alignBaseline="@+id/back"
+        android:layout_alignBottom="@+id/back"
         android:layout_alignParentRight="true"
         android:onClick="goNext"
         android:text="Next" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/back"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

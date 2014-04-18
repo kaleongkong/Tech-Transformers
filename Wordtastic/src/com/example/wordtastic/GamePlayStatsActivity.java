@@ -21,6 +21,10 @@ public class GamePlayStatsActivity extends Activity{
 		restart = (Button)findViewById(R.id.gameplaystats_restart);
 		timeused.setText("Time Used: "+getIntent().getExtras().getInt("timeused"));
 		score.setText("Score: "+getIntent().getExtras().getInt("score"));
+		FontModifier.initTypeface(getAssets(), timeused);
+		FontModifier.initTypeface(getAssets(), score);
+		FontModifier.initTypeface(getAssets(), home);
+		FontModifier.initTypeface(getAssets(), restart);
 	}
 	public void onClickRestart(View v){
 		Intent i = new Intent(this, GalleryActivity.class);

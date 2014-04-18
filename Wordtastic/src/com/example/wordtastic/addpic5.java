@@ -5,16 +5,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class addpic5 extends Activity {
-
+	Button back;
+	TextView title;
+	TextView deckname;
+	Button backtogallery;
+	TextView text;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic5);
 		
-        TextView text = (TextView) findViewById(R.id.textView2);
+		back = (Button) findViewById(R.id.button2);
+		title = (TextView) findViewById(R.id.textView1);
+		deckname = (TextView) findViewById(R.id.textView3);
+		backtogallery = (Button) findViewById(R.id.back);
+        text = (TextView) findViewById(R.id.textView2);
+        
+        FontModifier.initTypeface(getAssets(), back);
+        FontModifier.initTypeface(getAssets(), title);
+        FontModifier.initTypeface(getAssets(), deckname);
+        FontModifier.initTypeface(getAssets(), backtogallery);
+        FontModifier.initTypeface(getAssets(), text);
         
 //		Intent i = getIntent();
 //		String name = i.getStringExtra("name");

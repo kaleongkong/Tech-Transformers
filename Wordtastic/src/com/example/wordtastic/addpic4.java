@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class addpic4 extends Activity {
 
@@ -16,8 +16,12 @@ public class addpic4 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic4);
-		
-		Button goNext= (Button) findViewById(R.id.button1);
+		TextView title = (TextView) findViewById(R.id.name);
+		Button back = (Button) findViewById(R.id.button2);
+		Button goNext= (Button) findViewById(R.id.back);
+		FontModifier.initTypeface(getAssets(), back);
+		FontModifier.initTypeface(getAssets(), goNext);
+		FontModifier.initTypeface(getAssets(), goNext);
 		goNext.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){ 
 //				EditText text = (EditText)findViewById(R.id.name);

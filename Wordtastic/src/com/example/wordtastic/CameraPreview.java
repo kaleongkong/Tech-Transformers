@@ -30,7 +30,7 @@ public class CameraPreview extends Activity {
 	Uri imageURI;
 	final Context c = this;
 	Button takePictureButton;
-
+	Button back;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +46,9 @@ public class CameraPreview extends Activity {
 		
 		
 		takePictureButton = (Button)findViewById(R.id.take_picture);
-		
+		back = (Button) findViewById(R.id.back);
+		FontModifier.initTypeface(getAssets(), takePictureButton);
+		FontModifier.initTypeface(getAssets(), back);
 		takePictureButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override

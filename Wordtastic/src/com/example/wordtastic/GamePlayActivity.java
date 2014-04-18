@@ -60,6 +60,7 @@ public class GamePlayActivity extends Activity{
 		iv = (ImageView) findViewById(R.id.imageView);
 		ques_num = (TextView) findViewById(R.id.ques_num);
 		incorrecttext = (TextView) findViewById(R.id.incorrecttext);
+		FontModifier.initTypeface(getAssets(), skip);
 		//*** timer
 		timer = (TextView) findViewById(R.id.time);
 		time = timelimit;
@@ -81,6 +82,12 @@ public class GamePlayActivity extends Activity{
 		iv.setImageDrawable(currentimg);
 		maxScore = images.size();
 		scoreView.setText("Score: "+score+"/"+maxScore);
+		FontModifier.initTypeface(getAssets(), skip);
+		FontModifier.initTypeface(getAssets(), tryagain);
+		FontModifier.initTypeface(getAssets(), ques_num);
+		FontModifier.initTypeface(getAssets(), incorrecttext);
+		FontModifier.initTypeface(getAssets(), timer);
+		FontModifier.initTypeface(getAssets(), scoreView);
 		//**** timer
 		handler = new Handler();
 		runnable = new Runnable(){
