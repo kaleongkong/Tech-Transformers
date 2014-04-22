@@ -26,18 +26,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="128dp"
+        android:gravity="center"
         android:text="Wordtastic"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="35sp" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="500px"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:gravity="center"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="19dp"
         android:text="The new way to learn vocabulary"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="20sp" />
