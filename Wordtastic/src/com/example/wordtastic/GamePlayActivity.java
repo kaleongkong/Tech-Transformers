@@ -1,7 +1,6 @@
 package com.example.wordtastic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +11,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class GamePlayActivity extends Activity{
+public class GamePlayActivity extends Activity implements RecognitionListener{
 	ImageButton voice;
 	Button skip;
 	Button tryagain;
@@ -37,8 +38,10 @@ public class GamePlayActivity extends Activity{
 	Drawable crossmark;
 	Drawable currentimg;
 	String currentans;
+	TextView speaktext;
 	//***** voice input
 	static final int check = 1111;
+	SpeechRecognizer mSpeechRecognizer;
 	//*****
 	//*****for timer
 	boolean Running = true;
@@ -61,6 +64,9 @@ public class GamePlayActivity extends Activity{
 		ques_num = (TextView) findViewById(R.id.ques_num);
 		incorrecttext = (TextView) findViewById(R.id.incorrecttext);
 		FontModifier.initTypeface(getAssets(), skip);
+		mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+		mSpeechRecognizer.setRecognitionListener(this);
+		speaktext = (TextView) findViewById(R.id.speaktext);
 		//*** timer
 		timer = (TextView) findViewById(R.id.time);
 		time = timelimit;
@@ -194,13 +200,13 @@ public class GamePlayActivity extends Activity{
 	public void checkAnswer(){
 		if(results == null || results.size()==0){
 			Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH );
+			//mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 			i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 			i.putExtra(RecognizerIntent.EXTRA_PROMPT, "What is in the Picture?!");
-			startActivityForResult(i, check);
+			i.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, "com.example.wordtastic");
+			mSpeechRecognizer.startListening(i);
+			//startActivityForResult(i, check);
 		}
-		
-		
-		//**
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		if(requestCode == check && resultCode == RESULT_OK){
@@ -227,6 +233,74 @@ public class GamePlayActivity extends Activity{
 			incorrecttext.setText("It sounded like: "+ firstword);
 			skip.setText("Skip");
 		}
+		
+	}
+	@Override
+	public void onBeginningOfSpeech() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onBufferReceived(byte[] arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onEndOfSpeech() {
+		speaktext.setVisibility(View.GONE);
+		
+	}
+	@Override
+	public void onError(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onEvent(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onPartialResults(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onReadyForSpeech(Bundle arg0) {
+		speaktext.setVisibility(View.VISIBLE);
+		
+	}
+	@Override
+	public void onResults(Bundle r) {
+		results = r.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+		if (results.size() == 0) {
+			results.add("Could not detect speech!");
+		} 
+		boolean b = false;
+		int pos = images.indexOf(currentimg);
+		String firstword = null;
+		for(String s: results){
+			firstword = results.get(0);
+			if(s.equals(vocab_dict.get(pos))){
+				b = true;
+			}
+		}
+		
+		results=new ArrayList<String>();
+		if(b){
+			updateResult(checkmark, true);
+		}else{
+			updateResult(crossmark, false);
+			tryagain.setVisibility(View.VISIBLE);
+			incorrecttext.setVisibility(View.VISIBLE);
+			incorrecttext.setText("It sounded like: "+ firstword);
+			skip.setText("Skip");
+		}
+		
+	}
+	@Override
+	public void onRmsChanged(float arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 
