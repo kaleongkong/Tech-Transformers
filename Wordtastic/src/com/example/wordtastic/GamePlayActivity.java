@@ -2,6 +2,7 @@ package com.example.wordtastic;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,8 +15,8 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,10 +46,13 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	//*****
 	//*****for timer
 	boolean Running = true;
+	boolean nextRound = false;
 	Runnable runnable;
 	Handler handler;
+	Handler delay_handler;
 	int timelimit=30;
 	int time;
+	int delay_time;
 	Thread thread;
 	//*******
 	int score;
@@ -145,40 +149,72 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	
 	
 	private void updateResult(Drawable indicator, boolean result){
-		
+		Log.v("updateResult","updateResult");
 		LayerDrawable ld = new LayerDrawable(new Drawable[]{currentimg, indicator});
 		iv.setImageDrawable(ld);
-		if(images.indexOf(currentimg)==images.size()-1){
-			skip.setText("Finish");
-		}else{
-			skip.setText("Next");
-		}
+		//*******************************
+		delay_handler = new Handler();
+		delay_time = 1;
+		int time_gap = 500;
+		tuneDelay(delay_time, nextRound, delay_handler, time_gap);
+		//********************************
 		if(result){
 			score++;
 		}
 		scoreView.setText("Score: "+score+"/"+maxScore);
-		voice.setVisibility(View.GONE);
 	}
-	public void onClickSkip(View v){
-		String state = skip.getText().toString();
-		
-		incorrecttext.setVisibility(View.GONE);
-		if(state.equals("Next")){
-			voice.setVisibility(View.VISIBLE);
-			tryagain.setVisibility(View.GONE);
-			skip.setText("Skip");
+	
+	public void tuneDelay(int period, boolean control, Handler handler, int gap){
+		class TunableRunnable implements Runnable{
+			int p;
+			boolean c;
+			int g;
+			public TunableRunnable(int period, boolean control, int gap){
+				p= period;
+				c= control;
+				g=gap;
+			}
+			@Override
+			public void run() {
+				while(c){
+					try{
+						Thread.sleep(g); // 1 second
+					}catch(InterruptedException e){
+						e.printStackTrace();
+					}
+					if (p>0){
+						p-=1;
+					}else{
+						proceedNextRound();
+						c = false;
+					}
+				}
+			}
+			
 		}
+		TunableRunnable delay = new TunableRunnable(period, control, gap);
+		delay_handler.post(delay);
+	}
+	
+	
+	public void onClickSkip(View v){
+		proceedNextRound();
+	}
+	@SuppressLint("UseValueOf")
+	public void proceedNextRound(){
+		incorrecttext.setVisibility(View.GONE);
 		int next = images.indexOf(currentimg)+1;
-		ques_num.setText("Question"+new Integer(next+1).toString());
+		ques_num.setText("Question"+ Integer.valueOf(next+1).toString());
 		if(next<images.size()){
 			currentimg = images.get(next);
 			iv.setImageDrawable(currentimg);
 		}else{
-			
+			Log.v("exit", "extgameplay");
 			exitGamePlay();
 		}
-		
 	}
+	
+	
 	private void exitGamePlay(){
 		Intent i = new Intent(this, GamePlayStatsActivity.class);
 		i.putExtra("score", score);
@@ -208,33 +244,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 			//startActivityForResult(i, check);
 		}
 	}
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		if(requestCode == check && resultCode == RESULT_OK){
-			results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-		boolean b = false;
-		int pos = images.indexOf(currentimg);
-		String firstword = null;
-		for(String s: results){
-			firstword = results.get(0);
-			if(s.equals(vocab_dict.get(pos))){
-				b = true;
-			}
-		}
-		
-		results=new ArrayList<String>();
-		if(b){
-			updateResult(checkmark, true);
-		}else{
-			updateResult(crossmark, false);
-			tryagain.setVisibility(View.VISIBLE);
-			incorrecttext.setVisibility(View.VISIBLE);
-			incorrecttext.setText("It sounded like: "+ firstword);
-			skip.setText("Skip");
-		}
-		
-	}
+
 	@Override
 	public void onBeginningOfSpeech() {
 		// TODO Auto-generated method stub
@@ -287,14 +297,16 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		}
 		
 		results=new ArrayList<String>();
+		nextRound = b;
+		Log.v("onResults","onResults");
 		if(b){
 			updateResult(checkmark, true);
 		}else{
 			updateResult(crossmark, false);
+			voice.setVisibility(View.GONE);
 			tryagain.setVisibility(View.VISIBLE);
 			incorrecttext.setVisibility(View.VISIBLE);
 			incorrecttext.setText("It sounded like: "+ firstword);
-			skip.setText("Skip");
 		}
 		
 	}

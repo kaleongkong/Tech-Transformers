@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingLeft="60dp"
-                    android:text="Tree"
+                    android:text="Table"
                     android:textSize="30sp" />
             </LinearLayout>
 
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingLeft="60dp"
-                    android:text="Table"
+                    android:text="Tree"
                     android:textSize="30sp" />
             </LinearLayout>
         </LinearLayout>
