@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_gallery_main"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30dp" />
 	
-    <HorizontalScrollView
+    <!--  HorizontalScrollView
         android:id="@+id/deckScrollView"
         android:layout_width="match_parent"
         android:layout_height="130dp"
@@ -66,19 +67,7 @@
 		        android:scaleType="centerCrop"
 		        android:src="@drawable/baldeagle600x450" />
         </LinearLayout>
-    </HorizontalScrollView>
-
-    <Button
-        android:id="@+id/galleryplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/deckScrollView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:onClick="onClickPlay"
-        android:text="START GAME"
-        android:textSize="20sp" 
-        />
+    </HorizontalScrollView-->
 
     <Button
         android:id="@+id/back"
@@ -109,12 +98,22 @@
         android:onClick="onClickEditDeck"
         android:text="edit deck" />
 
+    <Button
+        android:id="@+id/galleryplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newdeck"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickPlay"
+        android:text="START GAME"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/deckname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/deckScrollView"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/galleryplay"
+        android:layout_alignLeft="@+id/editdeck"
         android:text="Current Deck: Default"
         android:textSize="15sp" />
 
