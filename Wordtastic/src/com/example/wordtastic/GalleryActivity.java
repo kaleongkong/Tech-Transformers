@@ -27,19 +27,24 @@ public class GalleryActivity extends Activity{
 			 R.drawable.table
 	    };
 	private Bitmap[] images;
-	public RelativeLayout l;
+	private RelativeLayout l;
+	private int selected;
+	private TextView deckname;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery_main);
+		//setUp();
 		l = (RelativeLayout) findViewById(R.id.activity_gallery_main);
 		Log.v("hello", String.valueOf(l));
 		TextView title = (TextView) findViewById(R.id.gallery);
 		Log.v("hello", String.valueOf(title));
-		TextView deckname = (TextView)findViewById(R.id.deckname);
+		deckname = (TextView)findViewById(R.id.deckname);
 		Button play = (Button)findViewById(R.id.galleryplay);
 		Button back = (Button)findViewById(R.id.back);
 		Button newdeck = (Button) findViewById(R.id.newdeck);
 		Button editdeck = (Button) findViewById(R.id.editdeck);
+		selected =mImageIds.length/2;
+		deckname.setText("Current Deck: "+String.valueOf(selected));
 		
 		FontModifier.initTypeface(getAssets(), title);
 		FontModifier.initTypeface(getAssets(), deckname);
@@ -85,9 +90,10 @@ public class GalleryActivity extends Activity{
         coverFlow.setOnItemSelectedListener(new OnItemSelectedListener(){
 
    		@Override
-   		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-   				long arg3) {
+   		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
    			Log.v("id", String.valueOf(arg2));
+   			selected = arg2;
+   			deckname.setText("Current Deck: "+String.valueOf(selected));
    			
    		}
 
@@ -100,7 +106,7 @@ public class GalleryActivity extends Activity{
 
 	   		@Override
 	   		public void onItemClick(AdapterView<?> a, View v, int num1, long num2) {
-	   			//Log.v("id", String.valueOf(num1));
+	   			
 	   		}
    	 	});
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);

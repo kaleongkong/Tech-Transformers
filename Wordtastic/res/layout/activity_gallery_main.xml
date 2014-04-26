@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/galleryplay"
         android:layout_alignLeft="@+id/editdeck"
-        android:text="Current Deck: Default"
+        android:text=""
         android:textSize="15sp" />
 
 </RelativeLayout>
