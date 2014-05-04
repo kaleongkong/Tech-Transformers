@@ -96,11 +96,17 @@ public class HashSharedPreferenceMap {
 	public Set<String> getAllCardNamesInDeck(String s){
 		String key = DECKHEADER+s;
 		Log.v("get cardskey",key);
-		return sharedStringPreferences.getStringSet(key, new HashSet<String>());
+		Set<String> cardnameset = new HashSet<String>();
+		Set<String> keys = sharedStringPreferences.getStringSet(key, new HashSet<String>());
+		for(String k:keys){
+			String[] temp = k.split("_");
+			cardnameset.add(temp[temp.length-1]);
+		}
+		return cardnameset;
 	}
 	public String getCardLoc(String deck, String card){
 		String key = DECKHEADER+deck+"_"+card;
-		return sharedStringPreferences.getString(key, null);
+		return sharedStringPreferences.getString(key, "This card doesn't exist");
 	}
 	
 	public void clearAll(){
@@ -138,7 +144,13 @@ public class HashSharedPreferenceMap {
 	}
 
 	public Set<String> getAllKey(){
-		return sharedStringPreferences.getStringSet(rootdeck, new HashSet<String>());
+		Set<String> decknameset = new HashSet<String>();
+		Set<String> keys = sharedStringPreferences.getStringSet(rootdeck, new HashSet<String>());
+		for(String k:keys){
+			String[] temp = k.split("_");
+			decknameset.add(temp[temp.length-1]);
+		}
+		return decknameset;
 	}
 
 }

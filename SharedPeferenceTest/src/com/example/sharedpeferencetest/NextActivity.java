@@ -29,10 +29,7 @@ public class NextActivity extends Activity{
 		et = (EditText) findViewById(R.id.cardname);
 		etdeck = (EditText) findViewById(R.id.deckedittext);
 		Set<String> keys = hashmap.getAllDeckNames();
-		for(String k:keys){
-			String[] temp = k.split("_");
-			a.add(temp[temp.length-1]);
-		}
+		a.addAll(keys);
 	}
 	public void getDeckNames(View view){
 		lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,a));
@@ -42,10 +39,7 @@ public class NextActivity extends Activity{
 		cardnamelist = new ArrayList<String>();
 		String key = etdeck.getText().toString();
 		Set<String> keys = hashmap.getAllCardNamesInDeck(key);
-		for(String k:keys){
-			String[] temp = k.split("_");
-			cardnamelist.add(temp[temp.length-1]);
-		}
+		cardnamelist.addAll(keys);
 		lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,cardnamelist));
 	}
 	public void getCardLocation(View view){
