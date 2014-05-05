@@ -32,7 +32,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	TextView timer;
 	TextView scoreView;
 	TextView incorrecttext;
-	ArrayList<Drawable> images;
+	//ArrayList<Drawable> images;
 	ArrayList<String> results;
 	ArrayList<String> vocab_dict;
 	Drawable checkmark;
@@ -58,9 +58,23 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	int score;
 	int maxScore;
 	
+	ImgLocalStorageHandler ilsh;
+	HashSharedPreferenceMap hspmap;
+	ArrayList<String> cardnamelist;
+	ArrayList<String> cardlocationlist;
+	ArrayList<Drawable> imglist;
+	
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gameplay_main);
+		
+		//****************************** Set Up Cards ****************************
+		
+		
+		//**************************************************************************
+		
+		
 		voice = (ImageButton) findViewById(R.id.soundinput);
 		skip = (Button) findViewById(R.id.skip);
 		tryagain = (Button) findViewById(R.id.tryagain);
@@ -80,17 +94,22 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		//****
 		scoreView = (TextView) findViewById(R.id.score);
 		score = 0;
-		images = new ArrayList<Drawable>();
+		//images = new ArrayList<Drawable>();
 		results = new ArrayList<String>();
 		vocab_dict = new ArrayList<String>();
 		checkmark = scaleDrawable(R.drawable.greencheckmark, 400, 400);
 		crossmark = scaleDrawable(R.drawable.redcrossmark, 400,400);
+		//******************setting up!!*****************************************
 		settingUp();
-		
-		currentimg = images.get(0);
-		currentans = "dolphin";
+		//***********************************************************************
+		//currentimg = images.get(0);
+		//currentans = "dolphin";
+		//iv.setImageDrawable(currentimg);
+		currentimg = imglist.get(0);
+		currentans = vocab_dict.get(0);
 		iv.setImageDrawable(currentimg);
-		maxScore = images.size();
+		
+		maxScore = imglist.size();
 		scoreView.setText("Score: "+score+"/"+maxScore);
 		FontModifier.initTypeface(getAssets(), skip);
 		FontModifier.initTypeface(getAssets(), tryagain);
@@ -133,13 +152,28 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		return new BitmapDrawable(getResources(), resized);
 	}
 	public void settingUp(){
-		images.add(getResources().getDrawable(R.drawable.tree));
+		ilsh = new ImgLocalStorageHandler(getResources());
+		cardnamelist = new ArrayList<String>();
+		cardlocationlist = new ArrayList<String>();
+		imglist = new ArrayList<Drawable>();
+		hspmap = new HashSharedPreferenceMap(this);
+		cardnamelist.addAll(hspmap.getAllCardNamesInDeck("animal"));
+		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
+		for(String k:cardnamelist){
+			Log.v("card location", hspmap.getCardLoc("animal", k));
+			//cardlocationlist.add(hspmap.getCardLoc("animal", k));
+			//imglist.add(new BitmapDrawable(getResources(),ilsh.loadImageFromInternal(hspmap.getCardLoc("animal", k))));
+			imglist.add(new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(k),500,500,true)));
+			vocab_dict.add(k);
+		}
+		/*images.add(getResources().getDrawable(R.drawable.tree));
 		images.add(getResources().getDrawable(R.drawable.cow));
 		vocab_dict.add("tree");
-		vocab_dict.add("cow");
+		vocab_dict.add("cow");*/
 	}
 	public void onClickTryAgain(View v){
 		iv.setImageDrawable(currentimg);
+		//iv.setImageBitmap(currentimg);
 		tryagain.setVisibility(View.GONE);
 		voice.setVisibility(View.VISIBLE);
 		incorrecttext.setVisibility(View.GONE);
@@ -150,6 +184,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	
 	private void updateResult(Drawable indicator, boolean result){
 		Log.v("updateResult","updateResult");
+		//Drawable d = new BitmapDrawable(getResources(),bitmap);
 		LayerDrawable ld = new LayerDrawable(new Drawable[]{currentimg, indicator});
 		iv.setImageDrawable(ld);
 		//*******************************
@@ -203,10 +238,10 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	@SuppressLint("UseValueOf")
 	public void proceedNextRound(){
 		incorrecttext.setVisibility(View.GONE);
-		int next = images.indexOf(currentimg)+1;
+		int next = imglist.indexOf(currentimg)+1;
 		ques_num.setText("Question"+ Integer.valueOf(next+1).toString());
-		if(next<images.size()){
-			currentimg = images.get(next);
+		if(next<imglist.size()){
+			currentimg = imglist.get(next);
 			iv.setImageDrawable(currentimg);
 		}else{
 			Log.v("exit", "extgameplay");
@@ -287,7 +322,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 			results.add("Could not detect speech!");
 		} 
 		boolean b = false;
-		int pos = images.indexOf(currentimg);
+		int pos = imglist.indexOf(currentimg);
 		String firstword = null;
 		for(String s: results){
 			firstword = results.get(0);

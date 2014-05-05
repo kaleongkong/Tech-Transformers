@@ -3,6 +3,7 @@ package com.example.wordtastic;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class Wordtastic_MainActivity extends Activity {
 		play = (Button)findViewById(R.id.play);
 		FontModifier.initTypeface(getAssets(),play);
 		setup();
+		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("Animal").toString());
 	}
 	
 	public void setup(){
@@ -37,7 +39,7 @@ public class Wordtastic_MainActivity extends Activity {
 		ilsh.saveDrawableToInternal(R.drawable.tree, "tree");
 		
 		try {
-			String def = "Default";
+			String def = "animal";
 			hspmap.saveDeckNamePreferences(def);
 			hspmap.saveCardNamePreferences(def, "cow");
 			hspmap.saveCardNamePreferences(def, "dolphin");
