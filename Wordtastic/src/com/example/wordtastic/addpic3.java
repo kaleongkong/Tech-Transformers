@@ -1,3 +1,4 @@
+
 package com.example.wordtastic;
 
 import android.app.Activity;
@@ -53,3 +54,4 @@ public class addpic3<MainActivity> extends Activity {
 	}
 
 }
+

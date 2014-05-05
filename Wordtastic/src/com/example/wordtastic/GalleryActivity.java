@@ -19,10 +19,10 @@ import android.widget.TextView;
 
 public class GalleryActivity extends Activity{
 	private Integer[] mImageIds = {
-			 R.drawable.baldeagle600x450,
-			 R.drawable.dolphins,
+			 R.drawable.eagle,
+			 R.drawable.dolphin,
 			 R.drawable.tree,
-			 R.drawable.lion_600x450,
+			 R.drawable.lion,
 			 R.drawable.cow,
 			 R.drawable.table
 	    };
