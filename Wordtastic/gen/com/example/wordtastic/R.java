@@ -22,17 +22,17 @@ public final class R {
     }
     public static final class drawable {
         public static final int background1=0x7f020000;
-        public static final int baldeagle600x450=0x7f020001;
-        public static final int coverpagecopy=0x7f020002;
-        public static final int cow=0x7f020003;
-        public static final int dad=0x7f020004;
-        public static final int dolphins=0x7f020005;
+        public static final int coverpagecopy=0x7f020001;
+        public static final int cow=0x7f020002;
+        public static final int dad=0x7f020003;
+        public static final int dolphin=0x7f020004;
+        public static final int eagle=0x7f020005;
         public static final int edited=0x7f020006;
         public static final int editedresultspage=0x7f020007;
         public static final int greencheckmark=0x7f020008;
         public static final int home=0x7f020009;
         public static final int ic_launcher=0x7f02000a;
-        public static final int lion_600x450=0x7f02000b;
+        public static final int lion=0x7f02000b;
         public static final int redcrossmark=0x7f02000c;
         public static final int sound_input=0x7f02000d;
         public static final int table=0x7f02000e;
