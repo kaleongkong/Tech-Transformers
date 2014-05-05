@@ -1,5 +1,6 @@
 package com.example.wordtastic;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
@@ -11,6 +12,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -54,10 +56,12 @@ public class CameraPreview extends Activity {
 			@Override
 			public void onClick(View v) 
 			{
-				camera.takePicture(null, null, takenPicture);
-				Intent i = new Intent(c, addpic3.class);
-				c.startActivity(i);
 				
+				camera.takePicture(null, null, takenPicture);
+				
+				
+				
+
 			}//end onClick
 		}); //end setOnClickListener
 		
@@ -140,7 +144,6 @@ public class CameraPreview extends Activity {
 		}//end ShowCamera class
 		 
 		
-		
 		private PictureCallback takenPicture = new PictureCallback() {
 
 	      	@Override
@@ -157,11 +160,24 @@ public class CameraPreview extends Activity {
 		      	{
 		         	Toast.makeText(getApplicationContext(), "Picture taken.", Toast.LENGTH_SHORT).show();    	
 		      	}//end else
-		      	
+		      	Intent i = new Intent(c, addpic3.class);
+				i.putExtra("BitmapImage", Bitmap.createScaledBitmap(takenCameraPicture,256,256,true));
+				c.startActivity(i);
 	   		}//end onPictureTaken
 		};//end PictureCallback
 		
 	
+		public Uri getPictureURI(Context inContext, Bitmap inImage)
+		{
+			ByteArrayOutputStream outputStreamBytes = new ByteArrayOutputStream();
+			inImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStreamBytes);
+			//String path = Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+			String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()+"/Title.jpg";
+			
+			System.out.println("MEDIA PATH: " + path); //PATH IS NULL
+			imageURI = Uri.parse(path);//NULL POINTER
+			return imageURI;
+		}//end getPictureURI
 	
 	
 	
