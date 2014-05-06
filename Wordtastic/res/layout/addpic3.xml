@@ -3,6 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+        <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="14dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/houseicon" />
+
+	  <ImageButton
+	    android:id="@+id/menuButton"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/homeButton"
+	    android:background="@null"
+	    android:layout_marginRight="14dp"
+	    android:scaleType="fitXY"
+	    android:src="@drawable/gearicon" />
+    
     <ImageView
         android:id="@+id/tree"
         android:layout_width="wrap_content"
@@ -10,15 +33,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/tree" />
-
-    <Button
-        android:id="@+id/button3"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="&lt; Back" />
 
     <Button
         android:id="@+id/button2"

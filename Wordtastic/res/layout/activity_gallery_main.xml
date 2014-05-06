@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Wordtastic_MainActivity" >
-
+    
     <TextView
         android:id="@+id/gallery"
         android:layout_width="wrap_content"
@@ -70,15 +70,6 @@
     </HorizontalScrollView-->
 
     <Button
-        android:id="@+id/back"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="&lt; Back" />
-
-    <Button
         android:id="@+id/newdeck"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -116,5 +107,25 @@
         android:layout_alignLeft="@+id/editdeck"
         android:text=""
         android:textSize="15sp" />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/newdeck"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/gearicon" />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/deckname"
+        android:layout_alignTop="@+id/menuButton"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/houseicon" />
 
 </RelativeLayout>

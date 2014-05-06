@@ -41,14 +41,6 @@
         android:text="Time Challenge"
         android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/back"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="&lt; Back" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -59,5 +51,25 @@
         android:text="Choose Game Mode"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp" />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/homeButton"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/gearicon" />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/houseicon" />
 
 </RelativeLayout>
