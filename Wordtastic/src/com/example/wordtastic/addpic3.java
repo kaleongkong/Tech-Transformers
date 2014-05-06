@@ -1,9 +1,13 @@
 
 package com.example.wordtastic;
 
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,6 +20,7 @@ public class addpic3<MainActivity> extends Activity {
 	
 	Bitmap takenCameraImage;
 	ImageView iv;
+	Uri pictureUri;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,13 +29,7 @@ public class addpic3<MainActivity> extends Activity {
 		TextView title = (TextView) findViewById(R.id.textView2);
 		Button goNext= (Button) findViewById(R.id.button2);
 		Button retake = (Button) findViewById(R.id.back);
-		goNext.setOnClickListener(new OnClickListener(){
-			public void onClick(View v){ 
-	            Intent n = new Intent(addpic3.this, addpic4.class);
-	            startActivity(n);
-	            
-	        }
-			});
+		
 		
 		
 		FontModifier.initTypeface(getAssets(), back);
@@ -39,12 +38,34 @@ public class addpic3<MainActivity> extends Activity {
 		FontModifier.initTypeface(getAssets(), retake);
 		
 		
-        //retrieve it on the other end:
-		Intent intent = getIntent();
-		takenCameraImage = Bitmap.createScaledBitmap((Bitmap) intent.getParcelableExtra("BitmapImage"),500,500,true);
-		iv=(ImageView) findViewById(R.id.tree);
-		iv.setImageBitmap(takenCameraImage);
+       
+		getImageAndputOnView();
+		
+		goNext.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){ 
+	            Intent n = new Intent(addpic3.this, addpic4.class);
+	            n.putExtra("pictureUri", pictureUri.toString());
+	            startActivity(n);
+	            
+	        }
+		});
 	}//end onCreate
+	
+	private void getImageAndputOnView(){
+		Intent i = getIntent();
+		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
+		iv=(ImageView) findViewById(R.id.tree);
+		BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2; // to save memory
+        try {
+			takenCameraImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options);
+			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 500,500,true);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		iv.setImageBitmap(takenCameraImage);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

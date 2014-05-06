@@ -1,11 +1,17 @@
 package com.example.wordtastic;
 
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class addpic5 extends Activity {
@@ -14,6 +20,10 @@ public class addpic5 extends Activity {
 	TextView deckname;
 	Button backtogallery;
 	TextView text;
+	
+	Uri pictureUri;
+	Bitmap takenCameraImage;
+	ImageView iv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,13 +40,26 @@ public class addpic5 extends Activity {
         FontModifier.initTypeface(getAssets(), deckname);
         FontModifier.initTypeface(getAssets(), backtogallery);
         FontModifier.initTypeface(getAssets(), text);
-        
-//		Intent i = getIntent();
-//		String name = i.getStringExtra("name");
-//		CharSequence msg = String.format("Flashcard %s added to:", name);
-//		text.setText(msg);
+        getImageAndputOnView();
 	}
 
+	
+	private void getImageAndputOnView(){
+		Intent i = getIntent();
+		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
+		iv=(ImageView) findViewById(R.id.tree);
+		BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2; // to save memory
+        try {
+			takenCameraImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options);
+			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 500,500,true);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		iv.setImageBitmap(takenCameraImage);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

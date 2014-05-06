@@ -1,18 +1,21 @@
 package com.example.wordtastic;
 
-import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.provider.MediaStore.Images.ImageColumns;
+import android.provider.MediaStore.Images.Media;
+import android.provider.MediaStore.MediaColumns;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -29,17 +32,15 @@ public class CameraPreview extends Activity {
 	FrameLayout cameraFrame;
 	private static final String TAG = "MyActivity";
 	Bitmap takenCameraPicture;
-	Uri imageURI;
 	final Context c = this;
 	Button takePictureButton;
 	Button back;
+	private Uri targetResource = Media.EXTERNAL_CONTENT_URI;
+	Uri pictureUri;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_camera_preview);
-		
-
-				
+		setContentView(R.layout.activity_camera_preview);		
 		createCameraSetUp();
 				
 		cameraFrame = (FrameLayout)findViewById(R.id.camera_screen);
@@ -56,20 +57,35 @@ public class CameraPreview extends Activity {
 			@Override
 			public void onClick(View v) 
 			{
+				takePicture();
+				//camera.takePicture(null, null, takenPicture);
 				
-				camera.takePicture(null, null, takenPicture);
-				
-				
-				
-
 			}//end onClick
 		}); //end setOnClickListener
 		
 		
 	}//end onCreate
 
-	
-	
+	private void takePicture() {
+        try {
+            pictureUri = prepareImageFile("temp", "Android Camera Image");			
+            Log.d(TAG, "picture uri: " + pictureUri.getPath());
+            camera.takePicture(null, null, takenPicture);
+        } catch (Exception ex) {
+            //saveResult(RESULT_CANCELED);
+        }
+    };
+    
+    private Uri prepareImageFile(String imageFileName, String imageDescription) {
+        //Log.d(TAG, "prepared file name: " + imageFileName);
+        ContentValues values = new ContentValues();
+        values.put(MediaColumns.TITLE, imageFileName);
+        if (imageDescription != null) {
+            values.put(ImageColumns.DESCRIPTION, "Android Camera Image");
+        }
+       // Log.d(TAG, "prepared values");
+        return getContentResolver().insert(targetResource, values);
+    }
 	//CAMERA EXTERNAL METHODS-------------------------------------------------------------------------------------------------------
 	
 		//sets up camera
@@ -148,37 +164,34 @@ public class CameraPreview extends Activity {
 
 	      	@Override
 	      	public void onPictureTaken(byte[] data, Camera camera) {
-
-		      	takenCameraPicture = BitmapFactory.decodeByteArray(data , 0, data.length);
-		      	
-		      	if(takenCameraPicture == null)
+	      		
+		      	if(data == null)
 		      	{
 		         	Toast.makeText(getApplicationContext(), "Picture not taken.", Toast.LENGTH_SHORT).show();
 		      	}//end if
 		      	
 		      	else
 		      	{
-		         	Toast.makeText(getApplicationContext(), "Picture taken.", Toast.LENGTH_SHORT).show();    	
+		         	Toast.makeText(getApplicationContext(), "Picture taken.", Toast.LENGTH_SHORT).show(); 
+		         	
+		         	try {
+						OutputStream fileOutputStream = getContentResolver().openOutputStream(pictureUri);
+						fileOutputStream.write(data);
+						fileOutputStream.flush();
+						fileOutputStream.close();
+			         	Intent i = new Intent(c, addpic3.class);
+			         	i.putExtra("pictureUri", pictureUri.toString());
+						c.startActivity(i);
+		         	} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		      	}//end else
-		      	Intent i = new Intent(c, addpic3.class);
-				i.putExtra("BitmapImage", Bitmap.createScaledBitmap(takenCameraPicture,256,256,true));
-				c.startActivity(i);
+		      	
 	   		}//end onPictureTaken
 		};//end PictureCallback
 		
-	
-		public Uri getPictureURI(Context inContext, Bitmap inImage)
-		{
-			ByteArrayOutputStream outputStreamBytes = new ByteArrayOutputStream();
-			inImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStreamBytes);
-			//String path = Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-			String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()+"/Title.jpg";
-			
-			System.out.println("MEDIA PATH: " + path); //PATH IS NULL
-			imageURI = Uri.parse(path);//NULL POINTER
-			return imageURI;
-		}//end getPictureURI
-	
+		
 	
 	
 
