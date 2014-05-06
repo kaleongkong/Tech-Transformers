@@ -17,7 +17,7 @@ public class AddCardActivity extends Activity {
 		Button upload = (Button)findViewById(R.id.upload);
 		Button take_pic = (Button)findViewById(R.id.take_pic);
 		TextView title = (TextView) findViewById(R.id.add_new_card);
-		FontModifier.initTypeface(getAssets(), back);
+		//FontModifier.initTypeface(getAssets(), back);
 		FontModifier.initTypeface(getAssets(), upload);
 		FontModifier.initTypeface(getAssets(), take_pic);
 		FontModifier.initTypeface(getAssets(), title);

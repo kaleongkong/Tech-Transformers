@@ -24,13 +24,15 @@ public class Wordtastic_MainActivity extends Activity {
 		FontModifier.initTypeface(getAssets(),subTitleText);
 		play = (Button)findViewById(R.id.play);
 		FontModifier.initTypeface(getAssets(),play);
-		setup();
-		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("Animal").toString());
+		ilsh = new ImgLocalStorageHandler(getResources());
+		hspmap = new HashSharedPreferenceMap(this);
+		if(hspmap.getAllCardNamesInDeck("animal").size()==0){
+			setup();
+		}
+		//Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
 	}
 	
 	public void setup(){
-		ilsh = new ImgLocalStorageHandler(getResources());
-		hspmap = new HashSharedPreferenceMap(this);
 		ilsh.saveDrawableToInternal(R.drawable.cow, "cow");
 		ilsh.saveDrawableToInternal(R.drawable.dolphin, "dolphin");
 		ilsh.saveDrawableToInternal(R.drawable.eagle, "eagle");
@@ -64,5 +66,11 @@ public class Wordtastic_MainActivity extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
 	}
-
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    play = null;
+		ilsh = null;
+		hspmap = null;
+	}
 }

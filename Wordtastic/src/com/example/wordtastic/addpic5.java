@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,12 +36,13 @@ public class addpic5 extends Activity {
 		backtogallery = (Button) findViewById(R.id.back);
         text = (TextView) findViewById(R.id.textView2);
         
-        FontModifier.initTypeface(getAssets(), back);
+        //FontModifier.initTypeface(getAssets(), back);
         FontModifier.initTypeface(getAssets(), title);
         FontModifier.initTypeface(getAssets(), deckname);
         FontModifier.initTypeface(getAssets(), backtogallery);
         FontModifier.initTypeface(getAssets(), text);
         getImageAndputOnView();
+        
 	}
 
 	
@@ -49,15 +51,20 @@ public class addpic5 extends Activity {
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
 		iv=(ImageView) findViewById(R.id.tree);
 		BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2; // to save memory
+        options.inSampleSize = 16; // to save memory
         try {
-			takenCameraImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options);
-			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 500,500,true);
+			takenCameraImage = rotateBitmap90(BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options));
+			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 600, 800, true);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		iv.setImageBitmap(takenCameraImage);
+	}
+	
+	private Bitmap rotateBitmap90(Bitmap bm){
+		Matrix matrix = new Matrix();
+		matrix.postRotate(90);
+		return Bitmap.createBitmap(bm , 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
 	}
 	
 	@Override
@@ -69,5 +76,12 @@ public class addpic5 extends Activity {
 	public void onClickBackToGallery(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
+	}
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    takenCameraImage = null;
+		iv = null;
+		pictureUri = null;
 	}
 }

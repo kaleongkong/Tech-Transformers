@@ -102,9 +102,6 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		//******************setting up!!*****************************************
 		settingUp();
 		//***********************************************************************
-		//currentimg = images.get(0);
-		//currentans = "dolphin";
-		//iv.setImageDrawable(currentimg);
 		currentimg = imglist.get(0);
 		currentans = vocab_dict.get(0);
 		iv.setImageDrawable(currentimg);
@@ -127,18 +124,20 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 					}catch(InterruptedException e){
 						e.printStackTrace();
 					}
-					handler.post(new Runnable(){
-						public void run(){
-							if (time>0){
-								time-=1;
-								int minite = time/60;
-								int second = time%60;
-								timer.setText(minite+":"+second);
-							}else{
-								exitGamePlay();
+					if(handler!=null){
+						handler.post(new Runnable(){
+							public void run(){
+								if (time>0){
+									time-=1;
+									int minite = time/60;
+									int second = time%60;
+									timer.setText(minite+":"+second);
+								}else{
+									exitGamePlay();
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 			}
 		};
@@ -149,6 +148,8 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	public Drawable scaleDrawable(int id, int width, int height){
 		Bitmap b = BitmapFactory.decodeResource(getResources(), id);
 		Bitmap resized = Bitmap.createScaledBitmap(b, width, height, false);
+		b.recycle();
+		b = null;
 		return new BitmapDrawable(getResources(), resized);
 	}
 	public void settingUp(){
@@ -161,19 +162,12 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
 		for(String k:cardnamelist){
 			Log.v("card location", hspmap.getCardLoc("animal", k));
-			//cardlocationlist.add(hspmap.getCardLoc("animal", k));
-			//imglist.add(new BitmapDrawable(getResources(),ilsh.loadImageFromInternal(hspmap.getCardLoc("animal", k))));
 			imglist.add(new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(k),500,500,true)));
 			vocab_dict.add(k);
 		}
-		/*images.add(getResources().getDrawable(R.drawable.tree));
-		images.add(getResources().getDrawable(R.drawable.cow));
-		vocab_dict.add("tree");
-		vocab_dict.add("cow");*/
 	}
 	public void onClickTryAgain(View v){
 		iv.setImageDrawable(currentimg);
-		//iv.setImageBitmap(currentimg);
 		tryagain.setVisibility(View.GONE);
 		voice.setVisibility(View.VISIBLE);
 		incorrecttext.setVisibility(View.GONE);
@@ -184,7 +178,6 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	
 	private void updateResult(Drawable indicator, boolean result){
 		Log.v("updateResult","updateResult");
-		//Drawable d = new BitmapDrawable(getResources(),bitmap);
 		LayerDrawable ld = new LayerDrawable(new Drawable[]{currentimg, indicator});
 		iv.setImageDrawable(ld);
 		//*******************************
@@ -350,5 +343,37 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+		voice = null;
+		skip= null;
+		tryagain= null;
+		iv= null;
+		ques_num= null;
+		timer= null;
+		scoreView= null;
+		incorrecttext= null;
+		results= null;
+		vocab_dict= null;
+		checkmark= null;
+		crossmark= null;
+		currentimg= null;
+		currentans= null;
+		speaktext= null;
+		
+		mSpeechRecognizer= null;
+		//*****
+		thread= null;
+		runnable= null;
+		handler= null;
+		delay_handler= null;
+		
+		
+		ilsh= null;
+		hspmap= null;
+		cardnamelist= null;
+		cardlocationlist= null;
+		imglist= null;
+	}
 }

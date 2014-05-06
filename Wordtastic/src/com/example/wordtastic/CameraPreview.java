@@ -51,7 +51,7 @@ public class CameraPreview extends Activity {
 		takePictureButton = (Button)findViewById(R.id.take_picture);
 		back = (Button) findViewById(R.id.back);
 		FontModifier.initTypeface(getAssets(), takePictureButton);
-		FontModifier.initTypeface(getAssets(), back);
+		//FontModifier.initTypeface(getAssets(), back);
 		takePictureButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -191,7 +191,18 @@ public class CameraPreview extends Activity {
 	   		}//end onPictureTaken
 		};//end PictureCallback
 		
-		
+		protected void onStop() {
+		    super.onStop();
+		    setContentView(new View(this));
+		    camera = null;
+			showCameraObject = null;
+			cameraHolder = null;
+			cameraFrame = null;
+			takenCameraPicture = null;
+			takePictureButton = null;
+			back = null;
+			pictureUri = null;
+		}
 	
 	
 

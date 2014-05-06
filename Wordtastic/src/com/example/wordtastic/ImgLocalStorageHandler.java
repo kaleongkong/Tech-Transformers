@@ -32,6 +32,10 @@ public class ImgLocalStorageHandler {
 	   
     public void saveDrawableToInternal(int imgid, String image_name){
 	    Bitmap bm = BitmapFactory.decodeResource(r, imgid);
+	    saveBitmapToInternal(bm, image_name);
+	}
+    
+    public void saveBitmapToInternal(Bitmap bm, String image_name){
 	    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM+"/wordtastic");
    	    Log.v("path", path.toString());
 		File file = new File(path, image_name+".jpg");
@@ -44,6 +48,8 @@ public class ImgLocalStorageHandler {
 		    bm.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
 		    outStream.flush();
 		    outStream.close();
+		    bm.recycle();
+		    bm = null;
 		 } catch (IOException e) {
 		 	// TODO Auto-generated catch block
 			 e.printStackTrace();

@@ -34,4 +34,12 @@ public class GamePlayStatsActivity extends Activity{
 		Intent i = new Intent(this, Wordtastic_MainActivity.class);
 		startActivity(i);
 	}
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    timeused = null;
+		score = null;
+		home = null;
+		restart =null;
+	}
 }

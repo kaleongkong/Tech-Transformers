@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -26,6 +25,7 @@ public class GalleryActivity extends Activity{
 			 R.drawable.cow,
 			 R.drawable.table
 	    };
+	CoverFlow coverFlow;
 	private Bitmap[] images;
 	private RelativeLayout l;
 	private int selected;
@@ -49,7 +49,7 @@ public class GalleryActivity extends Activity{
 		FontModifier.initTypeface(getAssets(), title);
 		FontModifier.initTypeface(getAssets(), deckname);
 		FontModifier.initTypeface(getAssets(), play);
-		FontModifier.initTypeface(getAssets(), back);
+		//FontModifier.initTypeface(getAssets(), back);
 		FontModifier.initTypeface(getAssets(), newdeck);
 		FontModifier.initTypeface(getAssets(), editdeck);
 		resourceIdToBitMap();
@@ -67,16 +67,27 @@ public class GalleryActivity extends Activity{
 	public void resourceIdToBitMap(){
 		int k= 0;
 	    images=new Bitmap[mImageIds.length];
+	    
 	    for(int i: mImageIds){
 	    	Bitmap originalImage = BitmapFactory.decodeResource(getResources(), i);
-	    	images[k]= originalImage;
+	    	images[k]= Bitmap.createScaledBitmap(originalImage, 200, 200, true);
+	    	originalImage.recycle();
 	    	k++;
 	    }
 	}
     
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    coverFlow = null;
+	    images = null;
+	    l = null;
+	  }
+	
+	
 	@SuppressWarnings("deprecation")
 	public void setUpCoverFlow(){
-        CoverFlow coverFlow;
+        
         coverFlow = new CoverFlow(this);
         
         coverFlow.setAdapter(new ImageAdapter(this, images));

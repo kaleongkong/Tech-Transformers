@@ -6,12 +6,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,31 +22,42 @@ public class addpic4 extends Activity {
 	Uri pictureUri;
 	Bitmap takenCameraImage;
 	ImageView iv;
+	EditText cardnameet;
+	HashSharedPreferenceMap hspm;
+	ImgLocalStorageHandler ilsh;
+	static final String  CURRENT_DECK = "animal";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic4);
 		TextView title = (TextView) findViewById(R.id.name);
 		Button back = (Button) findViewById(R.id.button2);
-		Button goNext= (Button) findViewById(R.id.back);
-		FontModifier.initTypeface(getAssets(), back);
+		Button goNext= (Button) findViewById(R.id.confirm);
+		cardnameet = (EditText) findViewById(R.id.editText1);
 		FontModifier.initTypeface(getAssets(), goNext);
 		FontModifier.initTypeface(getAssets(), goNext);
 		goNext.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){ 
-//				EditText text = (EditText)findViewById(R.id.name);
-//				String value = text.getText().toString();
-				
 				Intent n = new Intent(addpic4.this,addpic5.class);
-//				n.putExtra("name", value);
+				try {
+					hspm.saveCardNamePreferences(CURRENT_DECK, cardnameet.getText().toString());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				ilsh.saveBitmapToInternal(takenCameraImage, cardnameet.getText().toString());
 				n.putExtra("pictureUri", pictureUri.toString());
 		        startActivity(n);
 	        }
-			});
-		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-		
-		
+		});
 		getImageAndputOnView();
+		hspm = new HashSharedPreferenceMap(this);
+		ilsh = new ImgLocalStorageHandler(getResources());
+
+	}
+	private Bitmap rotateBitmap90(Bitmap bm){
+		Matrix matrix = new Matrix();
+		matrix.postRotate(90);
+		return Bitmap.createBitmap(bm , 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
 	}
 	
 	private void getImageAndputOnView(){
@@ -52,10 +65,10 @@ public class addpic4 extends Activity {
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
 		iv=(ImageView) findViewById(R.id.tree);
 		BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2; // to save memory
+        options.inSampleSize = 16; // to save memory
         try {
-			takenCameraImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options);
-			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 500,500,true);
+			takenCameraImage = rotateBitmap90(BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options));
+			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 600, 800, true);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,6 +82,15 @@ public class addpic4 extends Activity {
 		//getMenuInflater().inflate(R.menu.wordtastic__main, menu);
 		return true;
 	}
-	
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    takenCameraImage = null;
+		iv = null;
+		pictureUri = null;
+		cardnameet = null;
+		hspm = null;
+		ilsh = null;
+	}
 
 }

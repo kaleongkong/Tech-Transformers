@@ -11,10 +11,10 @@
     
     <FrameLayout
         android:id="@+id/camera_screen"
-        android:layout_width="275dp"
-        android:layout_height="275dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        />
 
     <Button
         android:id="@+id/take_picture"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="10dp"
         android:text="Take Picture!"
         android:textSize="25dp" />
 
@@ -30,8 +30,8 @@
         android:id="@+id/homeButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/take_picture"
         android:background="@null"
         android:scaleType="fitXY"
         android:src="@drawable/houseicon" />
@@ -41,7 +41,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/homeButton"
+        android:layout_alignParentTop="true"
         android:background="@null"
         android:scaleType="fitXY"
         android:src="@drawable/gearicon" />

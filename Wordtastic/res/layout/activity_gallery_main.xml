@@ -21,53 +21,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30dp" />
 	
-    <!--  HorizontalScrollView
-        android:id="@+id/deckScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_centerVertical="true" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-            <ImageButton
-		        android:id="@+id/imageButton1"
-		        android:layout_width="130dp"
-		        android:layout_height="130dp"
-		        android:cropToPadding="true"
-		        android:scaleType="centerCrop"
-		        android:src="@drawable/tree" />
-            <ImageButton
-		        android:id="@+id/imageButton2"
-		        android:layout_width="130dp"
-		        android:layout_height="130dp"
-		        android:cropToPadding="true"
-		        android:scaleType="centerCrop"
-		        android:src="@drawable/dolphins" />
-            <ImageButton
-		        android:id="@+id/imageButton3"
-		        android:layout_width="130dp"
-		        android:layout_height="130dp"
-		        android:cropToPadding="true"
-		        android:scaleType="centerCrop"
-		        android:src="@drawable/cow" />
-            <ImageButton
-		        android:id="@+id/imageButton4"
-		        android:layout_width="130dp"
-		        android:layout_height="130dp"
-		        android:cropToPadding="true"
-		        android:scaleType="centerCrop"
-		        android:src="@drawable/table" />
-            <ImageButton
-		        android:id="@+id/imageButton5"
-		        android:layout_width="130dp"
-		        android:layout_height="130dp"
-		        android:cropToPadding="true"
-		        android:scaleType="centerCrop"
-		        android:src="@drawable/baldeagle600x450" />
-        </LinearLayout>
-    </HorizontalScrollView-->
 
     <Button
         android:id="@+id/newdeck"

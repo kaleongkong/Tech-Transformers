@@ -28,7 +28,7 @@ public class AddActivity extends Activity {
         FontModifier.initTypeface(getAssets(), c4);
         FontModifier.initTypeface(getAssets(), addnew);
         FontModifier.initTypeface(getAssets(), delete);
-        FontModifier.initTypeface(getAssets(), back);
+        //FontModifier.initTypeface(getAssets(), back);
     }
     public void onClickAddNew(View v){
     	Intent i = new Intent(this, AddCardActivity.class);

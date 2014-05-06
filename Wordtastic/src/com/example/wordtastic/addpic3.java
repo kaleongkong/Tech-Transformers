@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,14 +26,14 @@ public class addpic3<MainActivity> extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic3);
-		Button back = (Button) findViewById(R.id.button3);
+		//Button back = (Button) findViewById(R.id.button3);
 		TextView title = (TextView) findViewById(R.id.textView2);
 		Button goNext= (Button) findViewById(R.id.button2);
 		Button retake = (Button) findViewById(R.id.back);
 		
 		
 		
-		FontModifier.initTypeface(getAssets(), back);
+		//FontModifier.initTypeface(getAssets(), back);
 		FontModifier.initTypeface(getAssets(), title);
 		FontModifier.initTypeface(getAssets(), goNext);
 		FontModifier.initTypeface(getAssets(), retake);
@@ -56,10 +57,13 @@ public class addpic3<MainActivity> extends Activity {
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
 		iv=(ImageView) findViewById(R.id.tree);
 		BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2; // to save memory
+        options.inSampleSize = 16; // to save memory
         try {
 			takenCameraImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri), null, options);
-			takenCameraImage = Bitmap.createScaledBitmap(takenCameraImage, 500,500,true);
+			
+			Bitmap temp = rotateBitmap90(takenCameraImage);
+			takenCameraImage = Bitmap.createScaledBitmap(temp, 600,800,true);
+			temp = null;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,12 +71,23 @@ public class addpic3<MainActivity> extends Activity {
 		iv.setImageBitmap(takenCameraImage);
 	}
 
+	private Bitmap rotateBitmap90(Bitmap bm){
+		Matrix matrix = new Matrix();
+		matrix.postRotate(90);
+		return Bitmap.createBitmap(bm , 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.wordtastic__main, menu);
 		return true;
 	}
-
+	protected void onStop() {
+	    super.onStop();
+	    setContentView(new View(this));
+	    takenCameraImage = null;
+		iv = null;
+		pictureUri = null;
+	}
 }
 
