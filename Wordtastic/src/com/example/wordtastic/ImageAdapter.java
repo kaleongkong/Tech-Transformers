@@ -43,7 +43,7 @@ public class ImageAdapter extends BaseAdapter {
     @SuppressWarnings("deprecation")
 	public boolean createReflectedImages() {
          //The gap we want between the reflection and the original image
-         final int reflectionGap = 4;
+         final int reflectionGap = images.length/2;
          
          
          int index = 0;

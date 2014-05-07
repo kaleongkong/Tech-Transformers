@@ -368,7 +368,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		runnable= null;
 		handler= null;
 		delay_handler= null;
-		
+		Running = false;
 		
 		ilsh= null;
 		hspmap= null;
