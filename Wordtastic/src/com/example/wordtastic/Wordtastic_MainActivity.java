@@ -26,23 +26,34 @@ public class Wordtastic_MainActivity extends Activity {
 		FontModifier.initTypeface(getAssets(),play);
 		ilsh = new ImgLocalStorageHandler(getResources());
 		hspmap = new HashSharedPreferenceMap(this);
-		if(hspmap.getAllCardNamesInDeck("animal").size()==0){
+		//if(hspmap.getAllCardNamesInDeck("animal").size()==0){
+		    //hspmap.clearAll();
 			setup();
-		}
+		//}
 		//Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
 	}
 	
 	public void setup(){
+		/*
 		ilsh.saveDrawableToInternal(R.drawable.cow, "cow");
 		ilsh.saveDrawableToInternal(R.drawable.dolphin, "dolphin");
 		ilsh.saveDrawableToInternal(R.drawable.eagle, "eagle");
 		ilsh.saveDrawableToInternal(R.drawable.lion, "lion");
 		ilsh.saveDrawableToInternal(R.drawable.table, "table");
 		ilsh.saveDrawableToInternal(R.drawable.tree, "tree");
+		*/
+		
+		ilsh.saveDrawableToInternal(R.drawable.duck, "duck");
+		ilsh.saveDrawableToInternal(R.drawable.squirrel, "squirrel");
+		ilsh.saveDrawableToInternal(R.drawable.cat, "cat");
+		ilsh.saveDrawableToInternal(R.drawable.lion, "lion");
+		ilsh.saveDrawableToInternal(R.drawable.monkey, "monkey");
+		ilsh.saveDrawableToInternal(R.drawable.chicken, "chicken");
 		
 		try {
 			String def = "animal";
 			hspmap.saveDeckNamePreferences(def);
+			/*
 			hspmap.saveCardNamePreferences(def, "cow");
 			hspmap.saveCardNamePreferences(def, "dolphin");
 			hspmap.saveCardNamePreferences(def, "eagle");
@@ -56,6 +67,22 @@ public class Wordtastic_MainActivity extends Activity {
 			hspmap.saveCardLocPreferences(def, "lion", ilsh.getImgPath()+"/lion.jpg");
 			hspmap.saveCardLocPreferences(def, "table", ilsh.getImgPath()+"/table.jpg");
 			hspmap.saveCardLocPreferences(def, "tree", ilsh.getImgPath()+"/tree.jpg");
+			*/
+			
+			hspmap.saveCardNamePreferences(def, "duck");
+			hspmap.saveCardNamePreferences(def, "squirrel");
+			hspmap.saveCardNamePreferences(def, "cat");
+			hspmap.saveCardNamePreferences(def, "lion");
+			hspmap.saveCardNamePreferences(def, "monkey");
+			hspmap.saveCardNamePreferences(def, "chicken");
+			
+			hspmap.saveCardLocPreferences(def, "duck", ilsh.getImgPath()+"/duck.jpg");
+			hspmap.saveCardLocPreferences(def, "squirrel", ilsh.getImgPath()+"/squirrel.jpg");
+			hspmap.saveCardLocPreferences(def, "cat", ilsh.getImgPath()+"/cat.jpg");
+			hspmap.saveCardLocPreferences(def, "lion", ilsh.getImgPath()+"/lion.jpg");
+			hspmap.saveCardLocPreferences(def, "monkey", ilsh.getImgPath()+"/monkey.jpg");
+			hspmap.saveCardLocPreferences(def, "chicken", ilsh.getImgPath()+"/chicken.jpg");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
