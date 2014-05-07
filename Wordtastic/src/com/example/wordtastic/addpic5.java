@@ -21,7 +21,7 @@ public class addpic5 extends Activity {
 	TextView deckname;
 	Button backtogallery;
 	TextView text;
-	
+	String cardname;
 	Uri pictureUri;
 	Bitmap takenCameraImage;
 	ImageView iv;
@@ -42,6 +42,7 @@ public class addpic5 extends Activity {
         FontModifier.initTypeface(getAssets(), backtogallery);
         FontModifier.initTypeface(getAssets(), text);
         getImageAndputOnView();
+        text.setText("Flashcard "+cardname+" was added to:");
         
 	}
 
@@ -49,6 +50,7 @@ public class addpic5 extends Activity {
 	private void getImageAndputOnView(){
 		Intent i = getIntent();
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
+		cardname = i.getStringExtra("cardname");
 		iv=(ImageView) findViewById(R.id.tree);
 		BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 16; // to save memory

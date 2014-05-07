@@ -46,6 +46,7 @@ public class addpic4 extends Activity {
 				}
 				ilsh.saveBitmapToInternal(takenCameraImage, cardnameet.getText().toString());
 				n.putExtra("pictureUri", pictureUri.toString());
+				n.putExtra("cardname", cardnameet.getText().toString());
 		        startActivity(n);
 	        }
 		});
