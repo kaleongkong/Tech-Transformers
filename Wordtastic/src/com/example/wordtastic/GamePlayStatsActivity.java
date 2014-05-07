@@ -31,7 +31,7 @@ public class GamePlayStatsActivity extends Activity{
 		startActivity(i);
 	}
 	public void onClickHome(View v){
-		Intent i = new Intent(this, Wordtastic_MainActivity.class);
+		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
 	}
 	protected void onStop() {

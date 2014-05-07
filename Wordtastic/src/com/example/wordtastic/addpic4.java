@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +32,8 @@ public class addpic4 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic4);
 		TextView title = (TextView) findViewById(R.id.name);
-		Button back = (Button) findViewById(R.id.button2);
+		//Button back = (Button) findViewById(R.id.button2);
+		ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
 		Button goNext= (Button) findViewById(R.id.confirm);
 		cardnameet = (EditText) findViewById(R.id.editText1);
 		FontModifier.initTypeface(getAssets(), goNext);
@@ -55,6 +57,12 @@ public class addpic4 extends Activity {
 		ilsh = new ImgLocalStorageHandler(getResources());
 
 	}
+	
+	public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
+	
 	private Bitmap rotateBitmap90(Bitmap bm){
 		Matrix matrix = new Matrix();
 		matrix.postRotate(90);

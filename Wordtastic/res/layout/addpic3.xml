@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/edited" >
 
-        <ImageButton
+     <ImageButton
         android:id="@+id/homeButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -11,8 +12,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="14dp"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="onClickHomeButton"
         android:src="@drawable/houseicon" />
 
 	  <ImageButton
@@ -21,7 +23,7 @@
 	    android:layout_height="50dp"
 	    android:layout_alignParentRight="true"
 	    android:layout_alignTop="@+id/homeButton"
-	    android:background="@null"
+	    android:background="@drawable/round_shadow_button"
 	    android:layout_marginRight="14dp"
 	    android:scaleType="fitXY"
 	    android:src="@drawable/gearicon" />
@@ -42,6 +44,7 @@
         android:layout_alignBottom="@+id/back"
         android:layout_alignParentRight="true"
         android:onClick="goNext"
+        android:background="#F7FE2E"
         android:text="Next" />
 
     <Button
@@ -51,6 +54,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tree"
         android:layout_marginTop="14dp"
+        android:background="#F7FE2E"
         android:text="Retake" />
 
     <TextView

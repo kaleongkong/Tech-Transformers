@@ -115,7 +115,7 @@ public class ImageAdapter extends BaseAdapter {
         ImageView i = new ImageView(mContext);
         //i.setImageResource(images[position]);
         i.setImageBitmap(images[position]);
-        i.setLayoutParams(new CoverFlow.LayoutParams(3*130, 3*130)); //control the size of images
+        i.setLayoutParams(new CoverFlow.LayoutParams(4*130, 4*130)); //control the size of images
         i.setScaleType(ImageView.ScaleType.FIT_XY ); 
         
         //Make sure we set anti-aliasing otherwise we get jaggies

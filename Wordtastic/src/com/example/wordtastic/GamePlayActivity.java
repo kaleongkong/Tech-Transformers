@@ -27,6 +27,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	ImageButton voice;
 	Button skip;
 	Button tryagain;
+	ImageButton homeButton;
 	ImageView iv;
 	TextView ques_num;
 	TextView timer;
@@ -77,6 +78,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		
 		voice = (ImageButton) findViewById(R.id.soundinput);
 		skip = (Button) findViewById(R.id.skip);
+		homeButton = (ImageButton) findViewById(R.id.homeButton);
 		tryagain = (Button) findViewById(R.id.tryagain);
 		iv = (ImageView) findViewById(R.id.imageView);
 		ques_num = (TextView) findViewById(R.id.ques_num);
@@ -173,6 +175,10 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		incorrecttext.setVisibility(View.GONE);
 	}
 	
+	public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 	
 	
 	

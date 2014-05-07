@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Default Deck"
+        android:text="Animals Deck"
         android:textSize="30sp" />
 
     <Button
@@ -137,6 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:onClick="onClickAddNew"
+        android:background="#F7FE2E"
         android:text="Add New Picture" />
 
     <Button
@@ -145,7 +146,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="#F7FE2E"
         android:text="Delete" />
 
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/round_shadow_button"
+        android:scaleType="fitXY"
+        android:onClick="onClickHomeButton"
+        android:src="@drawable/houseicon" />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/homeButton"
+        android:background="@drawable/round_shadow_button"
+        android:scaleType="fitXY"
+        android:src="@drawable/gearicon" />
 
 </RelativeLayout>

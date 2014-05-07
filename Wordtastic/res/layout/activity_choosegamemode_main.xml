@@ -18,17 +18,7 @@
         android:layout_marginTop="16dp"
         android:onClick="onClickStandard"
         android:text="Standard"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/settings"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/standard"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:onClick="onClickSettings"
-        android:text="Settings"
+        android:background="#F7FE2E"
         android:textSize="20sp" />
 
     <Button
@@ -39,6 +29,7 @@
         android:layout_centerVertical="true"
         android:onClick="onClickTimeChallenge"
         android:text="Time Challenge"
+        android:background="#F7FE2E"
         android:textSize="20dp" />
 
     <TextView
@@ -58,7 +49,7 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/homeButton"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
         android:src="@drawable/gearicon" />
 
@@ -66,10 +57,11 @@
         android:id="@+id/homeButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="onClickHomeButton"
         android:src="@drawable/houseicon" />
 
 </RelativeLayout>

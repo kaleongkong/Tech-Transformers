@@ -1,5 +1,6 @@
 package com.example.wordtastic;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,6 +14,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore.Images.ImageColumns;
 import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.MediaColumns;
@@ -22,6 +24,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class CameraPreview extends Activity {
@@ -34,7 +37,8 @@ public class CameraPreview extends Activity {
 	Bitmap takenCameraPicture;
 	final Context c = this;
 	Button takePictureButton;
-	Button back;
+	//Button back;
+	ImageButton homeButton;
 	private Uri targetResource = Media.EXTERNAL_CONTENT_URI;
 	Uri pictureUri;
 	@Override
@@ -49,7 +53,9 @@ public class CameraPreview extends Activity {
 		
 		
 		takePictureButton = (Button)findViewById(R.id.take_picture);
-		back = (Button) findViewById(R.id.back);
+		//back = (Button) findViewById(R.id.back);
+		homeButton = (ImageButton) findViewById(R.id.homeButton);
+		
 		FontModifier.initTypeface(getAssets(), takePictureButton);
 		//FontModifier.initTypeface(getAssets(), back);
 		takePictureButton.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +72,19 @@ public class CameraPreview extends Activity {
 		
 	}//end onCreate
 
+	public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
+	
 	private void takePicture() {
         try {
-            pictureUri = prepareImageFile("temp", "Android Camera Image");			
+            pictureUri = prepareImageFile("temp", "Android Camera Image");
+            
+            //File temppath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            //temppath.mkdir();
+            
+            //pictureUri = Uri.fromFile(temppath);
             Log.d(TAG, "picture uri: " + pictureUri.getPath());
             camera.takePicture(null, null, takenPicture);
         } catch (Exception ex) {
@@ -92,7 +108,7 @@ public class CameraPreview extends Activity {
 		private void createCameraSetUp()
 		{	Log.v("here","here");
 			//0 is back, 1 is front
-			camera = Camera.open();
+			camera = Camera.open(0);
 		}//end createCameraSetUp
 		
 		
@@ -175,17 +191,20 @@ public class CameraPreview extends Activity {
 		         	Toast.makeText(getApplicationContext(), "Picture taken.", Toast.LENGTH_SHORT).show(); 
 		         	
 		         	try {
+		         		Log.v("uri path", pictureUri.getPath());
+		         
 						OutputStream fileOutputStream = getContentResolver().openOutputStream(pictureUri);
 						fileOutputStream.write(data);
 						fileOutputStream.flush();
 						fileOutputStream.close();
-			         	Intent i = new Intent(c, addpic3.class);
-			         	i.putExtra("pictureUri", pictureUri.toString());
-						c.startActivity(i);
+			         	
 		         	} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+		         	Intent i = new Intent(c, addpic3.class);
+		         	i.putExtra("pictureUri", pictureUri.toString());
+					c.startActivity(i);
 		      	}//end else
 		      	
 	   		}//end onPictureTaken
@@ -194,14 +213,14 @@ public class CameraPreview extends Activity {
 		protected void onStop() {
 		    super.onStop();
 		    setContentView(new View(this));
-		    camera = null;
+		    //camera = null;
 			showCameraObject = null;
 			cameraHolder = null;
 			cameraFrame = null;
 			takenCameraPicture = null;
 			takePictureButton = null;
-			back = null;
-			pictureUri = null;
+			//back = null;
+			//pictureUri = null;
 		}
 	
 	

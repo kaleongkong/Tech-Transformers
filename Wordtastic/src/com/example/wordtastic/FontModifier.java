@@ -2,6 +2,7 @@ package com.example.wordtastic;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,4 +15,5 @@ public class FontModifier {
 		Typeface sniglet = Typeface.createFromAsset(am, "fonts/Sniglet-Regular.ttf");
 		v.setTypeface(sniglet);
 	}
+	
 }

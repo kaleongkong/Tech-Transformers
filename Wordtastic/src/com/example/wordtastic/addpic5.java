@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class addpic5 extends Activity {
 	TextView title;
 	TextView deckname;
 	Button backtogallery;
+	Button backtodeckpage;
+	ImageButton homeButton;
 	TextView text;
 	String cardname;
 	Uri pictureUri;
@@ -30,11 +33,13 @@ public class addpic5 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic5);
 		
-		back = (Button) findViewById(R.id.button2);
+		//back = (Button) findViewById(R.id.button2);
 		title = (TextView) findViewById(R.id.textView1);
 		deckname = (TextView) findViewById(R.id.textView3);
-		backtogallery = (Button) findViewById(R.id.back);
+		backtogallery = (Button) findViewById(R.id.backToGallery);
+		backtodeckpage = (Button) findViewById(R.id.backToDeckPage);
         text = (TextView) findViewById(R.id.textView2);
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
         
         //FontModifier.initTypeface(getAssets(), back);
         FontModifier.initTypeface(getAssets(), title);
@@ -79,6 +84,15 @@ public class addpic5 extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);
 	}
+	public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
+	public void onClickBackToDeckPage(View v){
+		Intent i = new Intent(this, AddActivity.class);
+		this.startActivity(i);
+	}
+	
 	protected void onStop() {
 	    super.onStop();
 	    setContentView(new View(this));

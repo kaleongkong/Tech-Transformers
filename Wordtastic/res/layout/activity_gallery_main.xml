@@ -30,6 +30,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="onClickNewDeck"
+        android:background="#F7FE2E"
         android:text="new deck" />
 
     <Button
@@ -40,6 +41,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:onClick="onClickEditDeck"
+        android:background="#F7FE2E"
         android:text="edit deck" />
 
     <Button
@@ -50,13 +52,14 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickPlay"
         android:text="START GAME"
+        android:background="#F7FE2E"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/deckname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/galleryplay"
+        android:layout_below="@+id/gallery"
         android:layout_alignLeft="@+id/editdeck"
         android:text=""
         android:textSize="15sp" />
@@ -67,8 +70,9 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/newdeck"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="openSettings"
         android:src="@drawable/gearicon" />
 
     <ImageButton
@@ -77,8 +81,9 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/deckname"
         android:layout_alignTop="@+id/menuButton"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="onClickHomeButton"
         android:src="@drawable/houseicon" />
 
 </RelativeLayout>

@@ -38,6 +38,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:onClick="onClickHome"
+        android:background="#F7FE2E"
         android:text="Home" />
 
     <Button
@@ -47,6 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="onClickRestart"
+        android:background="#F7FE2E"
         android:text="Start another game" />
 
     <TextView

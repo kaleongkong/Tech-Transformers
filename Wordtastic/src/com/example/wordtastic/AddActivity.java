@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -38,7 +40,8 @@ public class AddActivity extends Activity {
         //TextView c4= (TextView) findViewById(R.id.cardtree);
         Button addnew = (Button) findViewById(R.id.add_new);
         Button delete = (Button) findViewById(R.id.delete);
-        Button back = (Button) findViewById(R.id.back);
+        //Button back = (Button) findViewById(R.id.back);
+        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
         FontModifier.initTypeface(getAssets(), title);
         //FontModifier.initTypeface(getAssets(), c1);
         //FontModifier.initTypeface(getAssets(), c2);
@@ -95,9 +98,39 @@ public class AddActivity extends Activity {
 		}
 	}
     public void onClickAddNew(View v){
+    	/*
     	Intent i = new Intent(this, AddCardActivity.class);
     	startActivity(i);
+    	*/
+    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+		// set title
+		alertDialogBuilder.setTitle("Add New Picture");
+ 
+			// set dialog message
+		alertDialogBuilder
+			//.setMessage("Add New Picture")
+			.setCancelable(true)
+			.setPositiveButton("Take a New Picture",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					Intent i = new Intent(AddActivity.this, CameraPreview.class);
+			    	startActivity(i);
+				}
+			  })
+			.setNegativeButton("Upload From Device",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					dialog.cancel();
+				}
+			});
+			// create and show alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			alertDialog.show();
     }
+    
+    public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 
     
 }

@@ -18,6 +18,7 @@
         android:layout_marginTop="50dp"
         android:onClick="onClickPlay"
         android:text="Play!"
+        android:background="#F7FE2E"
         android:textSize="30sp" />
 
     <TextView

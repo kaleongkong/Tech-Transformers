@@ -41,12 +41,13 @@
     <Button
         android:id="@+id/skip"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="42dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/imageView"
         android:layout_marginBottom="14dp"
         android:onClick="onClickSkip"
+        android:background="@drawable/arrow"
         android:text="Skip" />
 
     <TextView
@@ -73,12 +74,12 @@
 
     <ImageButton
         android:id="@+id/soundinput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignTop="@+id/score"
         android:layout_centerHorizontal="true"
         android:onClick="onClickVoiceInput"
-        android:src="@drawable/sound_input" />
+        android:background="@drawable/redmic1" />
 
     <Button
         android:id="@+id/tryagain"
@@ -116,8 +117,9 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignTop="@+id/menuButton"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="onClickHomeButton"
         android:src="@drawable/houseicon" />
 
     <ImageButton
@@ -126,7 +128,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/imageView"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
         android:src="@drawable/gearicon" />
 

@@ -43,8 +43,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="14dp"
-        android:background="@null"
+        android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
+        android:onClick="setOnClickHomeButton"
         android:src="@drawable/houseicon" />
 
 	  <ImageButton
@@ -53,7 +54,7 @@
 	    android:layout_height="50dp"
 	    android:layout_alignParentRight="true"
 	    android:layout_alignTop="@+id/homeButton"
-	    android:background="@null"
+	    android:background="@drawable/round_shadow_button"
 	    android:layout_marginRight="14dp"
 	    android:scaleType="fitXY"
 	    android:src="@drawable/gearicon" />

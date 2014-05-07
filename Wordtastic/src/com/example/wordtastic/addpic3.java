@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class addpic3<MainActivity> extends Activity {
 		TextView title = (TextView) findViewById(R.id.textView2);
 		Button goNext= (Button) findViewById(R.id.button2);
 		Button retake = (Button) findViewById(R.id.back);
+		ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
 		
 		
 		
@@ -51,6 +53,11 @@ public class addpic3<MainActivity> extends Activity {
 	        }
 		});
 	}//end onCreate
+	
+	public void onClickHomeButton(View v){
+		Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 	
 	private void getImageAndputOnView(){
 		Intent i = getIntent();
