@@ -21,11 +21,11 @@ import android.widget.TextView;
 
 public class GalleryActivity extends Activity{
 	private Integer[] mImageIds = {
-			 R.drawable.eagle,
-			 R.drawable.dolphin,
+			 R.drawable.abcblocks,
+			 R.drawable.fruitbowl,
 			 R.drawable.tree,
 			 R.drawable.lion,
-			 R.drawable.cow,
+			 R.drawable.globe_cartoon,
 			 R.drawable.table
 	    };
 	CoverFlow coverFlow;
@@ -133,27 +133,27 @@ public class GalleryActivity extends Activity{
    			
    			if(selected == 0)
    			{
-   				deckname.setText("Current Deck: ");
+   				deckname.setText("Current Deck: Alphabet");
    			}
    			if(selected == 1)
    			{
-   				
+   				deckname.setText("Current Deck: Fruits");
    			}
    			if(selected == 2)
    			{
-   				
+   				deckname.setText("Current Deck: Plants");
    			}
    			if(selected == 3)
    			{
-   				
+   				deckname.setText("Current Deck: Animals");
    			}
    			if(selected == 4)
    			{
-   				
+   				deckname.setText("Current Deck: Places");
    			}
    			if(selected == 5)
    			{
-   				
+   				deckname.setText("Current Deck: Furniture");
    			}
    			
    		}

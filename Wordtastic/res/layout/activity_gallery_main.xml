@@ -44,17 +44,6 @@
         android:background="#F7FE2E"
         android:text="edit deck" />
 
-    <Button
-        android:id="@+id/galleryplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/newdeck"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClickPlay"
-        android:text="START GAME"
-        android:background="#F7FE2E"
-        android:textSize="20sp" />
-
     <TextView
         android:id="@+id/deckname"
         android:layout_width="wrap_content"
@@ -85,5 +74,26 @@
         android:scaleType="fitXY"
         android:onClick="onClickHomeButton"
         android:src="@drawable/houseicon" />
+
+    <Button
+        android:id="@+id/galleryplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newdeck"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="#F7FE2E"
+        android:onClick="onClickPlay"
+        android:text="START GAME"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/deckname"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:src="@drawable/arrow_down" />
 
 </RelativeLayout>
