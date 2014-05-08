@@ -28,11 +28,13 @@ public class addpic5 extends Activity {
 	Uri pictureUri;
 	Bitmap takenCameraImage;
 	ImageView iv;
+	String theme;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic5);
-		
+		Intent previous = getIntent();
+		theme = previous.getStringExtra("deck_theme");
 		//back = (Button) findViewById(R.id.button2);
 		title = (TextView) findViewById(R.id.textView1);
 		deckname = (TextView) findViewById(R.id.textView3);
@@ -40,7 +42,7 @@ public class addpic5 extends Activity {
 		backtodeckpage = (Button) findViewById(R.id.backToDeckPage);
         text = (TextView) findViewById(R.id.textView2);
         homeButton = (ImageButton) findViewById(R.id.homeButton);
-        
+        deckname.setText("Deck: "+theme);
         //FontModifier.initTypeface(getAssets(), back);
         FontModifier.initTypeface(getAssets(), title);
         FontModifier.initTypeface(getAssets(), deckname);
@@ -90,6 +92,7 @@ public class addpic5 extends Activity {
 	}
 	public void onClickBackToDeckPage(View v){
 		Intent i = new Intent(this, AddActivity.class);
+		i.putExtra("deck_theme", theme);
 		this.startActivity(i);
 	}
 	

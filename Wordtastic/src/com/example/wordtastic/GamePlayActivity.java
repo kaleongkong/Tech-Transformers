@@ -58,7 +58,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	//*******
 	int score;
 	int maxScore;
-	
+	String theme;
 	ImgLocalStorageHandler ilsh;
 	HashSharedPreferenceMap hspmap;
 	ArrayList<String> cardnamelist;
@@ -160,10 +160,12 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		cardlocationlist = new ArrayList<String>();
 		imglist = new ArrayList<Drawable>();
 		hspmap = new HashSharedPreferenceMap(this);
-		cardnamelist.addAll(hspmap.getAllCardNamesInDeck("animal"));
-		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
+		Intent i = getIntent();
+		theme = i.getStringExtra("deck_theme");
+		cardnamelist.addAll(hspmap.getAllCardNamesInDeck(theme));
+		Log.v("deck card name list", hspmap.getAllCardNamesInDeck(theme).toString());
 		for(String k:cardnamelist){
-			Log.v("card location", hspmap.getCardLoc("animal", k));
+			Log.v("card location", hspmap.getCardLoc(theme, k));
 			imglist.add(new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(k),500,500,true)));
 			vocab_dict.add(k);
 		}

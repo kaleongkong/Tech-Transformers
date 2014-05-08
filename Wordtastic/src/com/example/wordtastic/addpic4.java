@@ -26,12 +26,14 @@ public class addpic4 extends Activity {
 	EditText cardnameet;
 	HashSharedPreferenceMap hspm;
 	ImgLocalStorageHandler ilsh;
-	static final String  CURRENT_DECK = "animal";
+	static String  theme;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addpic4);
 		TextView title = (TextView) findViewById(R.id.name);
+		
+		
 		//Button back = (Button) findViewById(R.id.button2);
 		ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
 		Button goNext= (Button) findViewById(R.id.confirm);
@@ -42,13 +44,14 @@ public class addpic4 extends Activity {
 			public void onClick(View v){ 
 				Intent n = new Intent(addpic4.this,addpic5.class);
 				try {
-					hspm.saveCardNamePreferences(CURRENT_DECK, cardnameet.getText().toString());
+					hspm.saveCardNamePreferences(theme, cardnameet.getText().toString());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				ilsh.saveBitmapToInternal(takenCameraImage, cardnameet.getText().toString());
 				n.putExtra("pictureUri", pictureUri.toString());
 				n.putExtra("cardname", cardnameet.getText().toString());
+				n.putExtra("deck_theme", theme);
 		        startActivity(n);
 	        }
 		});
@@ -72,6 +75,7 @@ public class addpic4 extends Activity {
 	private void getImageAndputOnView(){
 		Intent i = getIntent();
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
+		theme = i.getStringExtra("deck_theme");
 		iv=(ImageView) findViewById(R.id.tree);
 		BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 16; // to save memory

@@ -29,34 +29,34 @@ public class AddActivity extends Activity {
 	ArrayList<String> cardlocationlist;
 	ArrayList<Drawable> imglist;
 	ArrayList<String> vocab_dict;
+	TextView deckthemetextview;
+	String theme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        TextView title = (TextView) findViewById(R.id.deck);
-        //TextView c1 = (TextView) findViewById(R.id.cardcow);
-        //TextView c2 = (TextView) findViewById(R.id.carddaddy);
-        //TextView c3 = (TextView) findViewById(R.id.cardtable);
-        //TextView c4= (TextView) findViewById(R.id.cardtree);
-        Button addnew = (Button) findViewById(R.id.add_new);
-        Button delete = (Button) findViewById(R.id.delete);
-        //Button back = (Button) findViewById(R.id.back);
-        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
-        FontModifier.initTypeface(getAssets(), title);
-        //FontModifier.initTypeface(getAssets(), c1);
-        //FontModifier.initTypeface(getAssets(), c2);
-        //FontModifier.initTypeface(getAssets(), c3);
-        //FontModifier.initTypeface(getAssets(), c4);
-        FontModifier.initTypeface(getAssets(), addnew);
-        FontModifier.initTypeface(getAssets(), delete);
-        //FontModifier.initTypeface(getAssets(), back);
-        
-        vocab_dict = new ArrayList<String>();
-        // fill in any details dynamically here
+        Intent intent = getIntent();
+    	theme = intent.getStringExtra("deck_theme");
+    	vocab_dict = new ArrayList<String>();
         loadImgs();
         outerlayout = (LinearLayout)findViewById(R.id.scrollviewlayout);
         setup();
         
+        
+        
+        TextView title = (TextView) findViewById(R.id.deck);
+        Button addnew = (Button) findViewById(R.id.add_new);
+        Button delete = (Button) findViewById(R.id.delete);
+        deckthemetextview = (TextView) findViewById(R.id.deck);
+        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
+        FontModifier.initTypeface(getAssets(), title);
+        FontModifier.initTypeface(getAssets(), addnew);
+        FontModifier.initTypeface(getAssets(), delete);
+        
+        
+        // fill in any details dynamically here
+        
+        deckthemetextview.setText(theme + " Deck");
         
         
     }
@@ -89,10 +89,10 @@ public class AddActivity extends Activity {
 		cardlocationlist = new ArrayList<String>();
 		imglist = new ArrayList<Drawable>();
 		hspmap = new HashSharedPreferenceMap(this);
-		cardnamelist.addAll(hspmap.getAllCardNamesInDeck("animal"));
-		Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
+		cardnamelist.addAll(hspmap.getAllCardNamesInDeck(theme));
+		Log.v("deck card name list", hspmap.getAllCardNamesInDeck(theme).toString());
 		for(String k:cardnamelist){
-			Log.v("card location", hspmap.getCardLoc("animal", k));
+			Log.v("card location", hspmap.getCardLoc(theme, k));
 			imglist.add(new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(k),400,400,true)));
 			vocab_dict.add(k);
 		}
@@ -105,8 +105,12 @@ public class AddActivity extends Activity {
     	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
 		// set title
-		alertDialogBuilder.setTitle("Add New Picture");
- 
+    	TextView dialogtitle = new TextView(this);
+    	dialogtitle.setText("Add New Picture");
+		//alertDialogBuilder.setTitle("Add New Picture");
+    	FontModifier.initTypeface(getAssets(),dialogtitle);
+    	alertDialogBuilder.setCustomTitle(dialogtitle);
+		//alertDialogBuilder.setT
 			// set dialog message
 		alertDialogBuilder
 			//.setMessage("Add New Picture")
@@ -114,6 +118,7 @@ public class AddActivity extends Activity {
 			.setPositiveButton("Take a New Picture",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
 					Intent i = new Intent(AddActivity.this, CameraPreview.class);
+					i.putExtra("deck_theme", theme);
 			    	startActivity(i);
 				}
 			  })

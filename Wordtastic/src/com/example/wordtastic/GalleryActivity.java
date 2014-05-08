@@ -1,9 +1,13 @@
 package com.example.wordtastic;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -32,11 +36,18 @@ public class GalleryActivity extends Activity{
 	private Bitmap[] images;
 	private RelativeLayout l;
 	private int selected;
+	private String setlecteddeck;
 	private TextView deckname;
+	private HashSharedPreferenceMap hspm; 
+	private ImgLocalStorageHandler ilsh;
+	private ArrayList<String> decknamelist;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery_main);
 		//setUp();
+		hspm = new HashSharedPreferenceMap(this);
+		ilsh = new ImgLocalStorageHandler(getResources());
+		getAllDeckName();
 		l = (RelativeLayout) findViewById(R.id.activity_gallery_main);
 		Log.v("hello", String.valueOf(l));
 		TextView title = (TextView) findViewById(R.id.gallery);
@@ -48,24 +59,35 @@ public class GalleryActivity extends Activity{
 		Button newdeck = (Button) findViewById(R.id.newdeck);
 		Button editdeck = (Button) findViewById(R.id.editdeck);
 		selected =mImageIds.length/2;
-		deckname.setText("Current Deck: "+String.valueOf(selected));
+		
+		setlecteddeck = decknamelist.get(selected);
+		deckname.setText("Current Deck: "+setlecteddeck);
+		
+		
 		
 		FontModifier.initTypeface(getAssets(), title);
 		FontModifier.initTypeface(getAssets(), deckname);
 		FontModifier.initTypeface(getAssets(), play);
-		//FontModifier.initTypeface(getAssets(), back);
 		FontModifier.initTypeface(getAssets(), newdeck);
 		FontModifier.initTypeface(getAssets(), editdeck);
-		resourceIdToBitMap();
+		loadBitMaps();
     	setUpCoverFlow();
     	
 	}
+	
+	private void getAllDeckName(){
+		decknamelist = new ArrayList<String>();
+		decknamelist.addAll(hspm.getAllDeckNames());
+	}
+	
 	public void onClickPlay(View v){
 		Intent i = new Intent(this, ChooseGameMode.class);
+		i.putExtra("deck_theme", setlecteddeck);
 		startActivity(i);
 	}
 	public void onClickEditDeck(View v){
 		Intent i = new Intent(this, AddActivity.class);
+		i.putExtra("deck_theme", setlecteddeck);
 		startActivity(i);
 	}
 	public void onClickHomeButton(View v){
@@ -74,6 +96,7 @@ public class GalleryActivity extends Activity{
 	}
 	
 	//pop up settings button
+	@SuppressLint("NewApi")
 	public void openSettings(View v){
 		PopupMenu popupMenu = new PopupMenu(GalleryActivity.this, v);
 	      popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
@@ -89,16 +112,16 @@ public class GalleryActivity extends Activity{
 	      popupMenu.show();
 	}
 	
-	public void resourceIdToBitMap(){
+	public void loadBitMaps(){
 		int k= 0;
-	    images=new Bitmap[mImageIds.length];
-	    
-	    for(int i: mImageIds){
-	    	Bitmap originalImage = BitmapFactory.decodeResource(getResources(), i);
-	    	images[k]= Bitmap.createScaledBitmap(originalImage, 200, 200, true);
-	    	originalImage.recycle();
-	    	k++;
-	    }
+		images = new Bitmap[decknamelist.size()];
+		for(String n: decknamelist){
+			Log.v("dynamic", n);
+			ArrayList<String> cardnameset = new ArrayList<String>();
+			cardnameset.addAll(hspm.getAllCardNamesInDeck(n));
+			images[k]=Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(cardnameset.get(0)),200,200,true);
+			k++;
+		}
 	}
     
 	protected void onStop() {
@@ -129,33 +152,8 @@ public class GalleryActivity extends Activity{
    		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
    			Log.v("id", String.valueOf(arg2));
    			selected = arg2;
-   			//deckname.setText("Current Deck: "+String.valueOf(selected));
-   			
-   			if(selected == 0)
-   			{
-   				deckname.setText("Current Deck: Alphabet");
-   			}
-   			if(selected == 1)
-   			{
-   				deckname.setText("Current Deck: Fruits");
-   			}
-   			if(selected == 2)
-   			{
-   				deckname.setText("Current Deck: Plants");
-   			}
-   			if(selected == 3)
-   			{
-   				deckname.setText("Current Deck: Animals");
-   			}
-   			if(selected == 4)
-   			{
-   				deckname.setText("Current Deck: Places");
-   			}
-   			if(selected == 5)
-   			{
-   				deckname.setText("Current Deck: Furniture");
-   			}
-   			
+   			setlecteddeck = decknamelist.get(selected);
+   			deckname.setText("Current Deck: "+setlecteddeck);
    		}
 
    		@Override

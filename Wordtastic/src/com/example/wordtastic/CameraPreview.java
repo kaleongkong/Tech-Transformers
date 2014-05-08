@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class CameraPreview extends Activity {
 	
 	Camera camera = null;
@@ -202,8 +204,10 @@ public class CameraPreview extends Activity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+		         	Intent previous = getIntent();
 		         	Intent i = new Intent(c, addpic3.class);
 		         	i.putExtra("pictureUri", pictureUri.toString());
+		         	i.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
 					c.startActivity(i);
 		      	}//end else
 		      	

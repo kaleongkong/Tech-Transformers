@@ -46,8 +46,10 @@ public class addpic3<MainActivity> extends Activity {
 		
 		goNext.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){ 
+				Intent previous = getIntent();
 	            Intent n = new Intent(addpic3.this, addpic4.class);
 	            n.putExtra("pictureUri", pictureUri.toString());
+	            n.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
 	            startActivity(n);
 	            
 	        }

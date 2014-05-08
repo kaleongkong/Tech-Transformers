@@ -15,7 +15,7 @@ public class ChooseGameMode extends Activity{
 	//Button back;
 	ImageButton homeButton;
 	TextView title;
-	
+	String theme;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,13 +29,17 @@ public class ChooseGameMode extends Activity{
 		FontModifier.initTypeface(getAssets(), standard);
 		//FontModifier.initTypeface(getAssets(), settings);
 		FontModifier.initTypeface(getAssets(), title);
+		Intent i = getIntent();
+		theme = i.getStringExtra("deck_theme");
 	}
 	public void onClickTimeChallenge(View v){
 		Intent i = new Intent(this, GamePlayActivity.class);
+		i.putExtra("deck_theme", theme);
 		this.startActivity(i);
 	}
 	public void onClickHomeButton(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
+		i.putExtra("deck_theme", theme);
 		this.startActivity(i);
 	}
 }

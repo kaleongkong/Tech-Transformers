@@ -27,67 +27,49 @@ public class Wordtastic_MainActivity extends Activity {
 		ilsh = new ImgLocalStorageHandler(getResources());
 		hspmap = new HashSharedPreferenceMap(this);
 		//if(hspmap.getAllCardNamesInDeck("animal").size()==0){
-		    //hspmap.clearAll();
+		    hspmap.clearAll();
 			setup();
 		//}
 		//Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
 	}
 	
-	public void setup(){
-		/*
-		ilsh.saveDrawableToInternal(R.drawable.cow, "cow");
-		ilsh.saveDrawableToInternal(R.drawable.dolphin, "dolphin");
-		ilsh.saveDrawableToInternal(R.drawable.eagle, "eagle");
-		ilsh.saveDrawableToInternal(R.drawable.lion, "lion");
-		ilsh.saveDrawableToInternal(R.drawable.table, "table");
-		ilsh.saveDrawableToInternal(R.drawable.tree, "tree");
-		*/
+	private void setup(){
+		int[] drawableImgAnimal = {R.drawable.duck, R.drawable.squirrel, R.drawable.cat, R.drawable.lion, R.drawable.monkey, R.drawable.chicken};
+		String[] cardNameAnimal = {"duck","squirrel","cat","lion","monkey","chicken"};
+		int[] drawableImgFruits = {R.drawable.fruitbowl};
+		String[] cardNameFruits = {"fruits"};
+		int[] drawableImgPlaces = {R.drawable.globe_cartoon};
+		String[] cardNamePlaces = {"places"};
+		int[] drawableImgPlants = {R.drawable.tree};
+		String[] cardNamePlants = {"tree"};
+		int[] drawableImgFurnitures = {R.drawable.table};
+		String[] cardNameFurnitures = {"table"};
+		int[] drawableImgAlphabets = {R.drawable.abcblocks};
+		String[] cardNameAlphabets = {"alphabets"};
+		setupDeck("animals", drawableImgAnimal, cardNameAnimal);
+		setupDeck("fruits", drawableImgFruits, cardNameFruits);
+		setupDeck("places", drawableImgPlaces, cardNamePlaces);
+		setupDeck("plants", drawableImgPlants, cardNamePlants);
+		setupDeck("furnitures", drawableImgFurnitures, cardNameFurnitures);
+		setupDeck("alphabets", drawableImgAlphabets, cardNameAlphabets);
+	}
+	private void setupDeck(String theme, int[] drawableImg, String[] cardname){
 		
-		ilsh.saveDrawableToInternal(R.drawable.duck, "duck");
-		ilsh.saveDrawableToInternal(R.drawable.squirrel, "squirrel");
-		ilsh.saveDrawableToInternal(R.drawable.cat, "cat");
-		ilsh.saveDrawableToInternal(R.drawable.lion, "lion");
-		ilsh.saveDrawableToInternal(R.drawable.monkey, "monkey");
-		ilsh.saveDrawableToInternal(R.drawable.chicken, "chicken");
-		
-		try {
-			String def = "animal";
-			hspmap.saveDeckNamePreferences(def);
-			/*
-			hspmap.saveCardNamePreferences(def, "cow");
-			hspmap.saveCardNamePreferences(def, "dolphin");
-			hspmap.saveCardNamePreferences(def, "eagle");
-			hspmap.saveCardNamePreferences(def, "lion");
-			hspmap.saveCardNamePreferences(def, "table");
-			hspmap.saveCardNamePreferences(def, "tree");
-			
-			hspmap.saveCardLocPreferences(def, "cow", ilsh.getImgPath()+"/cow.jpg");
-			hspmap.saveCardLocPreferences(def, "dolphin", ilsh.getImgPath()+"/dolphin.jpg");
-			hspmap.saveCardLocPreferences(def, "eagle", ilsh.getImgPath()+"/eagle.jpg");
-			hspmap.saveCardLocPreferences(def, "lion", ilsh.getImgPath()+"/lion.jpg");
-			hspmap.saveCardLocPreferences(def, "table", ilsh.getImgPath()+"/table.jpg");
-			hspmap.saveCardLocPreferences(def, "tree", ilsh.getImgPath()+"/tree.jpg");
-			*/
-			
-			hspmap.saveCardNamePreferences(def, "duck");
-			hspmap.saveCardNamePreferences(def, "squirrel");
-			hspmap.saveCardNamePreferences(def, "cat");
-			hspmap.saveCardNamePreferences(def, "lion");
-			hspmap.saveCardNamePreferences(def, "monkey");
-			hspmap.saveCardNamePreferences(def, "chicken");
-			
-			hspmap.saveCardLocPreferences(def, "duck", ilsh.getImgPath()+"/duck.jpg");
-			hspmap.saveCardLocPreferences(def, "squirrel", ilsh.getImgPath()+"/squirrel.jpg");
-			hspmap.saveCardLocPreferences(def, "cat", ilsh.getImgPath()+"/cat.jpg");
-			hspmap.saveCardLocPreferences(def, "lion", ilsh.getImgPath()+"/lion.jpg");
-			hspmap.saveCardLocPreferences(def, "monkey", ilsh.getImgPath()+"/monkey.jpg");
-			hspmap.saveCardLocPreferences(def, "chicken", ilsh.getImgPath()+"/chicken.jpg");
-			
-		} catch (Exception e) {
+		for(int i=0; i<cardname.length; i++){
+			ilsh.saveDrawableToInternal(drawableImg[i], cardname[i]);
+		}
+		try{
+			hspmap.saveDeckNamePreferences(theme);
+			for(int i=0; i<cardname.length;i++){
+				hspmap.saveCardNamePreferences(theme, cardname[i]);
+				hspmap.saveCardLocPreferences(theme, cardname[i], ilsh.getImgPath()+"/"+cardname[i]+".jpg");
+			}
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 	}
+	
 	
 	public void onClickPlay(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
