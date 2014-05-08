@@ -44,7 +44,7 @@
         android:layout_alignBottom="@+id/back"
         android:layout_alignParentRight="true"
         android:onClick="goNext"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="Next" />
 
     <Button
@@ -54,7 +54,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tree"
         android:layout_marginTop="14dp"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="Retake" />
 
     <TextView

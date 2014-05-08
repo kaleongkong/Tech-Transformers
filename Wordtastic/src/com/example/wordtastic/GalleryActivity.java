@@ -48,7 +48,7 @@ public class GalleryActivity extends Activity{
 		Button newdeck = (Button) findViewById(R.id.newdeck);
 		Button editdeck = (Button) findViewById(R.id.editdeck);
 		selected =mImageIds.length/2;
-		deckname.setText("Current Deck: "+String.valueOf(selected));
+		deckname.setText("Current Deck: Animals");//+String.valueOf(selected));
 		
 		FontModifier.initTypeface(getAssets(), title);
 		FontModifier.initTypeface(getAssets(), deckname);

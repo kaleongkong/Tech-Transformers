@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text="Take Picture!"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:textSize="25dp" />
 
     <ImageButton
