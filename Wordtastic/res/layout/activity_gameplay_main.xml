@@ -89,6 +89,7 @@
         android:layout_centerHorizontal="true"
         android:text="Try Again"
         android:onClick="onClickTryAgain"
+        style="@style/btnStyleOrange"
         android:visibility="gone" />
 
     <TextView

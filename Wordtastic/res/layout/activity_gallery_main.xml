@@ -24,24 +24,22 @@
 
     <Button
         android:id="@+id/newdeck"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="onClickNewDeck"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="new deck" />
 
     <Button
         android:id="@+id/editdeck"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:onClick="onClickEditDeck"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="edit deck" />
 
     <TextView
@@ -82,7 +80,7 @@
         android:layout_above="@+id/newdeck"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:onClick="onClickPlay"
         android:text="START GAME"
         android:textSize="20sp" />

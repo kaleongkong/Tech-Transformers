@@ -12,6 +12,7 @@
         android:layout_below="@+id/add_new_card"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
+        style="@style/btnStyleOrange"
         android:text="Upload From Your Device" />
 
     <Button
@@ -22,6 +23,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:onClick="onClickTakePicture"
+        style="@style/btnStyleOrange"
+        
         android:text="Take a Picture" />
 
     <TextView

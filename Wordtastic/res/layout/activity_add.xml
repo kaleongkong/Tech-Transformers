@@ -132,20 +132,20 @@
 
     <Button
         android:id="@+id/add_new"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:onClick="onClickAddNew"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="Add New Picture" />
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#F7FE2E"
+        style="@style/btnStyleOrange"
         android:text="Delete" />
 
     <ImageButton
