@@ -90,6 +90,9 @@ public class addpic5 extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
 	}
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
 	public void onClickBackToDeckPage(View v){
 		Intent i = new Intent(this, AddActivity.class);
 		i.putExtra("deck_theme", theme);

@@ -192,6 +192,10 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	
     public void onClickHomeButton(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);

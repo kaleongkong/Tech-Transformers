@@ -14,13 +14,13 @@ public class HelpButton {
 	//pop up settings button
 	@SuppressLint("NewApi")
 
-//	public static void openSettings(View v, Activity a){
-//		Log.d("help", "help has been clicked");
-//		PopupMenu popupMenu = new PopupMenu(a, v);
-//		popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
-//	    popupMenu.setOnMenuItemClickListener(new MenuClick(a));	    
-//		popupMenu.show();
-//	}
+	public static void openSettings(View v, Activity a){
+		Log.d("help", "help has been clicked");
+		PopupMenu popupMenu = new PopupMenu(a, v);
+		popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
+	    popupMenu.setOnMenuItemClickListener(new MenuClick(a));	    
+		popupMenu.show();
+	}
 	
 	public static void openAbout(Activity a) {
 		Log.d("about", "openAbout has been called");

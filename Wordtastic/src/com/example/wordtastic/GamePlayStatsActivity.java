@@ -12,6 +12,7 @@ public class GamePlayStatsActivity extends Activity{
 	TextView score;
 	Button home;
 	Button restart;
+	boolean timeChallenge;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gameplaystats_main);
@@ -19,7 +20,13 @@ public class GamePlayStatsActivity extends Activity{
 		score = (TextView)findViewById(R.id.gameplaystats_score);
 		home = (Button) findViewById(R.id.gameplaystats_home);
 		restart = (Button)findViewById(R.id.gameplaystats_restart);
-		timeused.setText("Time Used: "+getIntent().getExtras().getInt("timeused"));
+		
+		timeChallenge = getIntent().getExtras().getBoolean("timeChallenge");
+		if(timeChallenge){
+			timeused.setText("Time Used: "+getIntent().getExtras().getInt("timeused"));
+		}else{
+			timeused.setText("");
+		}
 		score.setText("Score: "+getIntent().getExtras().getInt("score"));
 		FontModifier.initTypeface(getAssets(), timeused);
 		FontModifier.initTypeface(getAssets(), score);

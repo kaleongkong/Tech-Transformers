@@ -159,7 +159,8 @@
         android:layout_alignTop="@+id/homeButton"
         android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
-        android:src="@drawable/gearicon" />
+        android:onClick="openSettings"
+        android:src="@drawable/helpicon" />
 
     <Button
         android:id="@+id/clear"

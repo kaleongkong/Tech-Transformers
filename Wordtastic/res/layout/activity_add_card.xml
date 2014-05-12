@@ -60,6 +60,7 @@
 	    android:background="@drawable/round_shadow_button"
 	    android:layout_marginRight="14dp"
 	    android:scaleType="fitXY"
-	    android:src="@drawable/gearicon" />
+	    android:onClick="openSettings"
+	    android:src="@drawable/helpicon" />
 
 </RelativeLayout>

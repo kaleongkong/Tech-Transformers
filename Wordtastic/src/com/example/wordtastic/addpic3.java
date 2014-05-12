@@ -61,6 +61,10 @@ public class addpic3<MainActivity> extends Activity {
 		this.startActivity(i);
 	}
 	
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	
 	private void getImageAndputOnView(){
 		Intent i = getIntent();
 		pictureUri = Uri.parse(i.getStringExtra("pictureUri"));
