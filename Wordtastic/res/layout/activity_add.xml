@@ -135,7 +135,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_paddingBottom="15dp"
         android:onClick="onClickAddNew"
         style="@style/btnStyleOrange"
         android:text="Add New Picture" />

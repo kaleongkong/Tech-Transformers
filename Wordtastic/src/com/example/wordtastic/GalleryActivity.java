@@ -102,7 +102,7 @@ public class GalleryActivity extends Activity{
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("Add New Deck");
-		alert.setMessage("Type the name of the new deck.");
+		alert.setMessage("Type the name of the new deck below");
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(this);
@@ -123,37 +123,6 @@ public class GalleryActivity extends Activity{
 		});
 
 		alert.show();
-		/*
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-		// set title
-    	TextView dialogtitle = new TextView(this);
-    	dialogtitle.setText("Add New Card");
-		//alertDialogBuilder.setTitle("Add New Picture");
-    	FontModifier.initTypeface(getAssets(), dialogtitle);
-    	alertDialogBuilder.setCustomTitle(dialogtitle);
-		//alertDialogBuilder.setT
-			// set dialog message
-		alertDialogBuilder
-			.setMessage("Add New Picture")
-			.setCancelable(true)
-			.setPositiveButton("Take a New Picture",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-					//Intent i = new Intent(AddActivity.this, CameraPreview.class);
-					//i.putExtra("deck_theme", theme);
-			    	//startActivity(i);
-				}
-			  })
-			.setNegativeButton("Upload From Device",new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-					//dialog.cancel();
-				}
-			});
-			// create and show alert dialog
-			AlertDialog alertDialog = alertDialogBuilder.create();
-			alertDialog.show();
-			*/
-		
 	}
 	
 	//pop up settings button
