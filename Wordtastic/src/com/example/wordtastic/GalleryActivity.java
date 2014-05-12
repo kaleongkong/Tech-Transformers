@@ -173,14 +173,14 @@ public class GalleryActivity extends Activity{
 	public void openSettings(View v){
 		PopupMenu popupMenu = new PopupMenu(GalleryActivity.this, v);
 	      popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
-	    
-	      popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-	   
-	   @Override
-	   public boolean onMenuItemClick(MenuItem item) {
-	    return true;
-	   }
-	  });
+	      
+	      popupMenu.setOnMenuItemClickListener(new MenuClick(this));
+//	      popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {	   
+//	   @Override
+//	   public boolean onMenuItemClick(MenuItem item) {
+//	    return true;
+//	   }
+//	  });
 	    
 	      popupMenu.show();
 	}
