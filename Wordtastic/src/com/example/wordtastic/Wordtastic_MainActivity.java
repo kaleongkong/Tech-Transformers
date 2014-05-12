@@ -27,7 +27,8 @@ public class Wordtastic_MainActivity extends Activity {
 		ilsh = new ImgLocalStorageHandler(getResources());
 		hspmap = new HashSharedPreferenceMap(this);
 		//if(hspmap.getAllCardNamesInDeck("animal").size()==0){
-		    hspmap.clearAll();
+		    
+			hspmap.clearAll(); //COMMENT OUT ONCE THE ENTIRE PROJECT IS FINISHED!
 			setup();
 		//}
 		//Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());

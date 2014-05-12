@@ -1,5 +1,9 @@
 package com.example.wordtastic;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
@@ -9,9 +13,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,6 +46,7 @@ public class AddActivity extends Activity {
 	ImageButton homeButton;
 	Button done;
 	Button clear;
+	private ImageView imgv;
 	
 	
 	AlertDialog.Builder deleteCardAlertDialogBuilder;
@@ -184,7 +193,9 @@ public class AddActivity extends Activity {
 			  })
 			.setNegativeButton("Upload From Device",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
-					dialog.cancel();
+					Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+					photoPickerIntent.setType("image/*");
+					startActivityForResult(photoPickerIntent, 1);
 				}
 			});
 			// create and show alert dialog
@@ -192,10 +203,85 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+        {
+            Uri chosenImageUri = data.getData();
+            Log.v("image path", chosenImageUri.getPath());
+            Bitmap mBitmap = null;
+            try {
+         	   mBitmap = Media.getBitmap(this.getContentResolver(), chosenImageUri);
+         	   mBitmap = getResizedBitmap(mBitmap, 1000);
+         	   //imgv.setImageBitmap(mBitmap); //don't need this
+         	   
+         	  //Bitmap bmp = intent.getExtras().get("data");
+         	  Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+         	  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+         	  bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+         	  byte[] byteArray = stream.toByteArray();
+         	   
+         	   /*
+         	   //CONVERT TO BYTE ARRAY AND PUT ALL THAT TRY CATCH STUFF FROM CAMERAPREVIEW IN HERE
+         	   OutputStream fileOutputStream = getContentResolver().openOutputStream(chosenImageUri);
+         	   fileOutputStream.write(data);
+        	   fileOutputStream.flush();
+        	   fileOutputStream.close();
+        	   */
+         	   
+         	   /*
+         	   Log.v("uri path", pictureUri.getPath());
+         	   OutputStream fileOutputStream = getContentResolver().openOutputStream(pictureUri);
+         	   fileOutputStream.write(data);
+         	   fileOutputStream.flush();
+         	   fileOutputStream.close();
+         	   */
+         	   
+         	   
+ 		   } catch (FileNotFoundException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 		   } catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 		   } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+ 		   }
+            
+           /*
+            * Intent previous = getIntent();
+		         	Intent i = new Intent(c, addpic3.class);
+		         	i.putExtra("pictureUri", pictureUri.toString());
+		         	i.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
+					c.startActivity(i);
+            */
+        }
+    }
+    
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+    
+
 	public void openSettings(View v){
 		HelpButton.openSettings(v, this);
 	}
 	
+
     public void onClickHomeButton(View v){
     	backToGallery();
 	}
@@ -221,6 +307,7 @@ public class AddActivity extends Activity {
     private void backToGallery(){
     	Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
+    	
     }
     
 }
