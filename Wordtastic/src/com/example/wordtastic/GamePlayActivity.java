@@ -17,6 +17,9 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -77,6 +80,16 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		
 		
 		voice = (ImageButton) findViewById(R.id.soundinput);
+
+		//flashing animation
+		final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+	    animation.setDuration(500); // duration - half a second
+	    animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+	    animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
+	    animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+	    voice.startAnimation(animation);
+		
+		
 		skip = (Button) findViewById(R.id.skip);
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
 		tryagain = (Button) findViewById(R.id.tryagain);
@@ -268,6 +281,8 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	public void onClickVoiceInput (View v){
 		
 		checkAnswer();
+		
+		v.clearAnimation();
 	}
 	public void checkAnswer(){
 		if(results == null || results.size()==0){

@@ -6,6 +6,8 @@ import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -91,6 +94,66 @@ public class GalleryActivity extends Activity{
 	public void onClickHomeButton(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
+	}
+	
+	
+	public void onClickNewDeck(View v){
+		
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Add New Deck");
+		alert.setMessage("Type the name of the new deck.");
+
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int whichButton) {
+			// Canceled.
+			dialog.cancel();
+		  }
+		});
+
+		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+		  public void onClick(DialogInterface dialog, int whichButton) {
+			  String value = input.getText().toString();
+			  // Do something with value!
+		  }
+		});
+
+		alert.show();
+		/*
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+		// set title
+    	TextView dialogtitle = new TextView(this);
+    	dialogtitle.setText("Add New Card");
+		//alertDialogBuilder.setTitle("Add New Picture");
+    	FontModifier.initTypeface(getAssets(), dialogtitle);
+    	alertDialogBuilder.setCustomTitle(dialogtitle);
+		//alertDialogBuilder.setT
+			// set dialog message
+		alertDialogBuilder
+			.setMessage("Add New Picture")
+			.setCancelable(true)
+			.setPositiveButton("Take a New Picture",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					//Intent i = new Intent(AddActivity.this, CameraPreview.class);
+					//i.putExtra("deck_theme", theme);
+			    	//startActivity(i);
+				}
+			  })
+			.setNegativeButton("Upload From Device",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					//dialog.cancel();
+				}
+			});
+			// create and show alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			alertDialog.show();
+			*/
+		
 	}
 	
 	//pop up settings button

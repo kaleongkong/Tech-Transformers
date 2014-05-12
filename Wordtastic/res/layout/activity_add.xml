@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/deck"
         android:paddingTop = "35dp"
-        android:paddingBottom="100dp"
+        android:paddingBottom="150dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
 
@@ -135,18 +135,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_paddingBottom="15dp"
         android:onClick="onClickAddNew"
         style="@style/btnStyleOrange"
         android:text="Add New Picture" />
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        style="@style/btnStyleOrange"
-        android:text="Delete" />
 
     <ImageButton
         android:id="@+id/homeButton"
@@ -169,5 +161,40 @@
         android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
         android:src="@drawable/gearicon" />
+
+    <Button
+        android:id="@+id/clear"
+        style="@style/btnStyleOrange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/edit"
+        android:layout_marginLeft="225dp"
+        android:visibility="gone"
+        android:onClick="onClickClearButton"
+        android:text="Clear" />
+
+    <Button
+        android:id="@+id/edit"
+        style="@style/btnStyleOrange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="26dp"
+        android:onClick="onClickEditButton"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/done"
+        style="@style/btnStyleOrange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickDoneButton"
+        android:text="Done"
+        android:visibility="gone" />
 
 </RelativeLayout>

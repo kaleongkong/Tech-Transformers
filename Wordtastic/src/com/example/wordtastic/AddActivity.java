@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -31,6 +32,17 @@ public class AddActivity extends Activity {
 	ArrayList<String> vocab_dict;
 	TextView deckthemetextview;
 	String theme;
+	TextView title;
+	Button addnew;
+	Button edit;
+	ImageButton homeButton;
+	Button done;
+	Button clear;
+	
+	
+	AlertDialog.Builder deleteCardAlertDialogBuilder;
+	TextView dialogtitle;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,19 +56,24 @@ public class AddActivity extends Activity {
         
         
         
-        TextView title = (TextView) findViewById(R.id.deck);
-        Button addnew = (Button) findViewById(R.id.add_new);
-        Button delete = (Button) findViewById(R.id.delete);
+        title = (TextView) findViewById(R.id.deck);
+        addnew = (Button) findViewById(R.id.add_new);
+        edit = (Button) findViewById(R.id.edit);
         deckthemetextview = (TextView) findViewById(R.id.deck);
-        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
         FontModifier.initTypeface(getAssets(), title);
         FontModifier.initTypeface(getAssets(), addnew);
-        FontModifier.initTypeface(getAssets(), delete);
+        FontModifier.initTypeface(getAssets(), edit);
         
         
         // fill in any details dynamically here
         
         deckthemetextview.setText(theme + " Deck");
+        done = (Button) findViewById(R.id.done);
+        clear = (Button) findViewById(R.id.clear);
+        FontModifier.initTypeface(getAssets(), done);
+        FontModifier.initTypeface(getAssets(), clear);
+        
         
         
     }
@@ -80,8 +97,51 @@ public class AddActivity extends Activity {
 	        innerlayout1.addView(image1);
 	        innerlayout1.addView(textView);
 	        i++;
-        }
-    }
+	        
+	        /*
+	        //SETTING UP DIALOG BOX FOR EACH IMAGE BUTTON
+	        image1.setOnClickListener(new OnClickListener() {
+	        	
+	        	@Override
+	        	public void onClick(View v)
+	        	{
+	        		deleteCardAlertDialogBuilder = new AlertDialog.Builder(AddActivity.this);
+
+	        		// set title
+	            	dialogtitle = new TextView(AddActivity.this);
+	            	dialogtitle.setText("Would you like to delete this card?");
+	        		//alertDialogBuilder.setTitle("Add New Picture");
+	            	FontModifier.initTypeface(getAssets(), dialogtitle);
+	            	deleteCardAlertDialogBuilder.setCustomTitle(dialogtitle);
+	        		//alertDialogBuilder.setT
+	        			// set dialog message
+	            	deleteCardAlertDialogBuilder
+	        			//.setMessage("Add New Picture")
+	        			.setCancelable(true)
+	        			.setPositiveButton("Cancel",new DialogInterface.OnClickListener() {
+	        				public void onClick(DialogInterface dialog,int id) {
+	        					//Intent i = new Intent(AddActivity.this, CameraPreview.class);
+	        					//i.putExtra("deck_theme", theme);
+	        			    	//startActivity(i);
+	        					dialog.cancel();
+	        				}
+	        			  })
+	        			.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
+	        				public void onClick(DialogInterface dialog,int id) {
+	        					//STUFF TO REMOVE CARD GETS PUT HERE	        					
+	        				}
+	        			});
+	            	
+	        			// create and show alert dialog
+	        			AlertDialog alertDialog = deleteCardAlertDialogBuilder.create();
+	        			alertDialog.show();
+	        		
+	        	}//end onClick
+	        });//end setOnClickListener
+	        */
+	        
+        }//end for loop
+    }//end setup method
     
     public void loadImgs(){
 		ilsh = new ImgLocalStorageHandler(getResources());
@@ -136,6 +196,21 @@ public class AddActivity extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
 	}
+    
+    public void onClickEditButton(View v){
+    	done.setVisibility(View.VISIBLE);
+    	clear.setVisibility(View.VISIBLE);
+    	edit.setVisibility(View.GONE);
+    }
 
+    public void onClickDoneButton(View v){
+    	done.setVisibility(View.GONE);
+    	clear.setVisibility(View.GONE);
+    	edit.setVisibility(View.VISIBLE);
+    }
+    
+    public void onClickClearButton(View v){
+    	//DELETE THE DECK HERE
+    }
     
 }
