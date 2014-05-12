@@ -4,7 +4,7 @@
     <!-- "shadow" -->
     <item>
         <shape android:shape="oval" >
-           <solid android:color="#0404B4"/>
+           <solid android:color="#8A0808"/> <!-- even darker red #8A0808 dark red #B40404 light red #DF0101 purple #0404B4 -->
            <corners android:radius="20dp" />
         </shape>
     </item>

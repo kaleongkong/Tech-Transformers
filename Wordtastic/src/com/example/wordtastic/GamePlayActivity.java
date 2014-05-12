@@ -131,6 +131,13 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		FontModifier.initTypeface(getAssets(), scoreView);
 		//**** timer
 		handler = new Handler();
+		
+		//STANDARD GAME MODE!!!!!!!
+		//pass integer boolean variable from previous intent (stating whether it's a time challenge or standard mode)
+		//have if condition, and if it's time challenge, put that runnable in that clause, if it's not, then just continue
+		
+		//note: make sure to disable text field of timer in time challenge mode
+		
 		runnable = new Runnable(){
 			public void run(){
 				while(Running){

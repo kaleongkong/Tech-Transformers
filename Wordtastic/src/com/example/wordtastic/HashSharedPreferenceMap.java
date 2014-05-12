@@ -116,7 +116,7 @@ public class HashSharedPreferenceMap {
 			deleteCard(deck, cardname);
 		}
 		Set<String> decknames = getAllDeckNames();
-		decknames.remove(deck);
+		decknames.remove(key);//CHANGED TO KEY FROM DECK
 		savePreferences(rootdeck,decknames);
 		deletePreferences(key);
 	}

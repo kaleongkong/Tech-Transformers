@@ -1,5 +1,6 @@
 package com.example.wordtastic;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -194,8 +196,6 @@ public class AddActivity extends Activity {
 					Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
 					photoPickerIntent.setType("image/*");
 					startActivityForResult(photoPickerIntent, 1);
-					
-					
 				}
 			});
 			// create and show alert dialog
@@ -216,12 +216,20 @@ public class AddActivity extends Activity {
          	   mBitmap = getResizedBitmap(mBitmap, 1000);
          	   //imgv.setImageBitmap(mBitmap); //don't need this
          	   
+         	  //Bitmap bmp = intent.getExtras().get("data");
+         	  Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+         	  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+         	  bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+         	  byte[] byteArray = stream.toByteArray();
          	   
+         	   /*
+         	   //CONVERT TO BYTE ARRAY AND PUT ALL THAT TRY CATCH STUFF FROM CAMERAPREVIEW IN HERE
          	   OutputStream fileOutputStream = getContentResolver().openOutputStream(chosenImageUri);
          	   fileOutputStream.write(data);
         	   fileOutputStream.flush();
         	   fileOutputStream.close();
-         	   //CONVERT TO BYTE ARRAY AND PUT ALL THAT TRY CATCH STUFF FROM CAMERAPREVIEW IN HERE
+        	   */
+         	   
          	   /*
          	   Log.v("uri path", pictureUri.getPath());
          	   OutputStream fileOutputStream = getContentResolver().openOutputStream(pictureUri);
@@ -287,7 +295,8 @@ public class AddActivity extends Activity {
     
     public void onClickClearButton(View v){
     	//DELETE THE DECK HERE
-    	hspmap.deleteDeck();
+    	//THIS ISNT CORRECT IS IT?!?!?!
+    	hspmap.deleteDeck(theme);
     	
     }
     
