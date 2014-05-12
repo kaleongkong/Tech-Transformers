@@ -197,8 +197,7 @@ public class AddActivity extends Activity {
 	}
 	
     public void onClickHomeButton(View v){
-		Intent i = new Intent(this, GalleryActivity.class);
-		this.startActivity(i);
+    	backToGallery();
 	}
     
     public void onClickEditButton(View v){
@@ -215,6 +214,13 @@ public class AddActivity extends Activity {
     
     public void onClickClearButton(View v){
     	//DELETE THE DECK HERE
+    	hspmap.deleteDeck(theme);
+    	backToGallery();
+    }
+    
+    private void backToGallery(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
     }
     
 }
