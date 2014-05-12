@@ -35,11 +35,21 @@ public class ChooseGameMode extends Activity{
 	public void onClickTimeChallenge(View v){
 		Intent i = new Intent(this, GamePlayActivity.class);
 		i.putExtra("deck_theme", theme);
+		i.putExtra("timeChallenge", true);
 		this.startActivity(i);
 	}
 	public void onClickHomeButton(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		i.putExtra("deck_theme", theme);
+		this.startActivity(i);
+	}
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	public void onClickStandard(View v){
+		Intent i = new Intent(this, GamePlayActivity.class);
+		i.putExtra("deck_theme", theme);
+		i.putExtra("timeChallenge", false);
 		this.startActivity(i);
 	}
 }

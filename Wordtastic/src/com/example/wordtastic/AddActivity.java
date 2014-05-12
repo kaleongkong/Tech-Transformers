@@ -203,6 +203,7 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
+<<<<<<< HEAD
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -276,6 +277,12 @@ public class AddActivity extends Activity {
     }
     
     
+=======
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	
+>>>>>>> b30240906fe74cd3a19a8c516ce06c24c796523e
     public void onClickHomeButton(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);

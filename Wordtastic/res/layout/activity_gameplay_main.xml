@@ -131,6 +131,7 @@
         android:layout_alignRight="@+id/imageView"
         android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
-        android:src="@drawable/gearicon" />
+        android:onClick="openSettings"
+        android:src="@drawable/helpicon" />
 
 </RelativeLayout>

@@ -66,6 +66,10 @@ public class addpic4 extends Activity {
 		this.startActivity(i);
 	}
 	
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	
 	private Bitmap rotateBitmap90(Bitmap bm){
 		Matrix matrix = new Matrix();
 		matrix.postRotate(90);

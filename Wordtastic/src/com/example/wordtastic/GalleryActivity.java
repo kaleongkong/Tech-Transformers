@@ -140,19 +140,16 @@ public class GalleryActivity extends Activity{
 	//pop up settings button
 	@SuppressLint("NewApi")
 	public void openSettings(View v){
-		PopupMenu popupMenu = new PopupMenu(GalleryActivity.this, v);
-	      popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
-	    
-	      popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-	   
-	   @Override
-	   public boolean onMenuItemClick(MenuItem item) {
-	    return true;
-	   }
-	  });
-	    
-	      popupMenu.show();
+		HelpButton.openSettings(v, this);
 	}
+//	      popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {	   
+//	   @Override
+//	   public boolean onMenuItemClick(MenuItem item) {
+//	    return true;
+//	   }
+//	  });
+	    
+
 	
 	public void loadBitMaps(){
 		int k= 0;

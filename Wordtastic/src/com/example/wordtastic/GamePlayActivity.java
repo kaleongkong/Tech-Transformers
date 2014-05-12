@@ -49,6 +49,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	SpeechRecognizer mSpeechRecognizer;
 	//*****
 	//*****for timer
+	boolean timeChallenge;
 	boolean Running = true;
 	boolean nextRound = false;
 	Runnable runnable;
@@ -130,6 +131,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		FontModifier.initTypeface(getAssets(), timer);
 		FontModifier.initTypeface(getAssets(), scoreView);
 		//**** timer
+		if(timeChallenge){
 		handler = new Handler();
 		
 		//STANDARD GAME MODE!!!!!!!
@@ -165,6 +167,9 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		};
 		thread = new Thread(runnable);
 		thread.start();
+		} else {
+			timer.setText(" ");
+		}
 		//****
 	}
 	public Drawable scaleDrawable(int id, int width, int height){
@@ -181,6 +186,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		imglist = new ArrayList<Drawable>();
 		hspmap = new HashSharedPreferenceMap(this);
 		Intent i = getIntent();
+		timeChallenge = i.getExtras().getBoolean("timeChallenge");
 		theme = i.getStringExtra("deck_theme");
 		cardnamelist.addAll(hspmap.getAllCardNamesInDeck(theme));
 		Log.v("deck card name list", hspmap.getAllCardNamesInDeck(theme).toString());
@@ -202,7 +208,9 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		this.startActivity(i);
 	}
 	
-	
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
 	
 	private void updateResult(Drawable indicator, boolean result){
 		Log.v("updateResult","updateResult");
@@ -274,7 +282,9 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	private void exitGamePlay(){
 		Intent i = new Intent(this, GamePlayStatsActivity.class);
 		i.putExtra("score", score);
-		i.putExtra("timeused", timelimit-time);
+		i.putExtra("timeChallenge", timeChallenge);{
+			i.putExtra("timeused", timelimit-time);			
+		}
 		resetData();
 		Running = false;
 		startActivity(i);

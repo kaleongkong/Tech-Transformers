@@ -60,7 +60,7 @@
         android:background="@drawable/round_shadow_button"
         android:scaleType="fitXY"
         android:onClick="openSettings"
-        android:src="@drawable/gearicon" />
+        android:src="@drawable/helpicon" />
 
     <ImageButton
         android:id="@+id/homeButton"

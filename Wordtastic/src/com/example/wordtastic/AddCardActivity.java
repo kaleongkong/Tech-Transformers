@@ -25,6 +25,10 @@ public class AddCardActivity extends Activity {
 		FontModifier.initTypeface(getAssets(), title);
 	}
 
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
+	
 	public void onClickTakePicture(View v){
 		Intent i = new Intent(this, CameraPreview.class);
 		startActivity(i);

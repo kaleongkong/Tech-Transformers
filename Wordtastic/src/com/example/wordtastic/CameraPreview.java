@@ -78,7 +78,9 @@ public class CameraPreview extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
 	}
-	
+	public void openSettings(View v){
+		HelpButton.openSettings(v, this);
+	}
 	private void takePicture() {
         try {
             pictureUri = prepareImageFile("temp", "Android Camera Image");
