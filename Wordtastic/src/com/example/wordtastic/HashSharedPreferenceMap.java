@@ -109,6 +109,23 @@ public class HashSharedPreferenceMap {
 		return sharedStringPreferences.getString(key, "This card doesn't exist");
 	}
 	
+	public void deleteDeck(String deck){ //delete deck
+		String key = DECKHEADER+deck;
+		Set<String> cardnames = getAllCardNamesInDeck(deck);
+		for(String cardname:cardnames){
+			deleteCard(deck, cardname);
+		}
+		Set<String> decknames = getAllDeckNames();
+		decknames.remove(deck);
+		savePreferences(rootdeck,decknames);
+		deletePreferences(key);
+	}
+	
+	public void deleteCard(String deck, String card){ //delete card
+		String key = DECKHEADER+deck+"_"+card;
+		deletePreferences(key);
+	}
+	
 	public void clearAll(){
 		Editor editor = sharedStringPreferences.edit();
 		editor.clear();
@@ -137,9 +154,15 @@ public class HashSharedPreferenceMap {
 	}
 
 	
-	private void savePreferences(String key, HashSet<String> value) {
+	private void savePreferences(String key, Set<String> value) {
 		Editor editor = sharedStringPreferences.edit();
 		editor.putStringSet(key, value);
+		editor.commit();
+	}
+	
+	private void deletePreferences(String key) {
+		Editor editor = sharedStringPreferences.edit();
+		editor.remove(key);
 		editor.commit();
 	}
 

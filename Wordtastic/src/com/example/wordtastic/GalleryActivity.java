@@ -1,8 +1,6 @@
 package com.example.wordtastic;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -10,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -36,7 +35,7 @@ public class GalleryActivity extends Activity{
 			 R.drawable.table
 	    };
 	CoverFlow coverFlow;
-	private Bitmap[] images;
+	private ArrayList<Bitmap> images;
 	private RelativeLayout l;
 	private int selected;
 	private String setlecteddeck;
@@ -75,6 +74,9 @@ public class GalleryActivity extends Activity{
     	setUpCoverFlow();
     	
 	}
+	
+	
+	
 	
 	private void getAllDeckName(){
 		decknamelist = new ArrayList<String>();
@@ -119,6 +121,16 @@ public class GalleryActivity extends Activity{
 		  public void onClick(DialogInterface dialog, int whichButton) {
 			  String value = input.getText().toString();
 			  // Do something with value!
+			  try {
+				hspm.saveDeckNamePreferences(value);
+				coverFlow.setVisibility(View.GONE);
+				decknamelist.add(value);
+				loadBitMaps();
+		    	setUpCoverFlow();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		  }
 		});
 
@@ -175,12 +187,17 @@ public class GalleryActivity extends Activity{
 	
 	public void loadBitMaps(){
 		int k= 0;
-		images = new Bitmap[decknamelist.size()];
+		//images = new Bitmap[decknamelist.size()];
+		images = new ArrayList<Bitmap>();
 		for(String n: decknamelist){
 			Log.v("dynamic", n);
 			ArrayList<String> cardnameset = new ArrayList<String>();
 			cardnameset.addAll(hspm.getAllCardNamesInDeck(n));
-			images[k]=Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(cardnameset.get(0)),200,200,true);
+			if(cardnameset.size()>0){
+				images.add(Bitmap.createScaledBitmap(ilsh.loadImageFromInternal(cardnameset.get(0)),200,200,true));
+			}else{
+				images.add(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.notavailable),200,200,true));
+			}
 			k++;
 		}
 	}
@@ -198,14 +215,15 @@ public class GalleryActivity extends Activity{
 	public void setUpCoverFlow(){
         
         coverFlow = new CoverFlow(this);
+        Bitmap[] imagesarray = new Bitmap[images.size()];
         
-        coverFlow.setAdapter(new ImageAdapter(this, images));
+        coverFlow.setAdapter(new ImageAdapter(this, images.toArray(imagesarray)));
         
-        ImageAdapter coverImageAdapter =  new ImageAdapter(this, images);
+        ImageAdapter coverImageAdapter =  new ImageAdapter(this, images.toArray(imagesarray));
         coverFlow.setAdapter(coverImageAdapter);
         
         coverFlow.setSpacing(-175); //set spacing between images, more negative, the closer those images
-        coverFlow.setSelection(images.length/2, true);
+        coverFlow.setSelection(images.size()/2, true);
         coverFlow.setAnimationDuration(1000);
         coverFlow.setOnItemSelectedListener(new OnItemSelectedListener(){
 
