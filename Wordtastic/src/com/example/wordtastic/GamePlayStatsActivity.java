@@ -33,10 +33,12 @@ public class GamePlayStatsActivity extends Activity{
 		FontModifier.initTypeface(getAssets(), home);
 		FontModifier.initTypeface(getAssets(), restart);
 	}
+	/*
 	public void onClickRestart(View v){
-		Intent i = new Intent(this, GalleryActivity.class);
+		Intent i = new Intent(this, ChooseGameMode.class);
 		startActivity(i);
 	}
+	*/
 	public void onClickHome(View v){
 		Intent i = new Intent(this, GalleryActivity.class);
 		startActivity(i);

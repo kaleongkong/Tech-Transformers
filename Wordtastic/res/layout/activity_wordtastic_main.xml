@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:text="The new way to learn vocabulary"
+        android:text="Learn Any Word Anywhere!"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="20sp" />
 

@@ -30,7 +30,7 @@ public class HelpButton {
 		alertDialogBuilder.setTitle("About");
 
 		alertDialogBuilder
-			.setMessage("This is a CS160 project developed by:\nDominic Kong \nPatrick Lin \nMeghana Seshradi \nJane Sima")
+			.setMessage("This app was developed for CS160 at UC Berkeley by:\n\nDominic Kong \nPatrick Lin \nMeghana Seshadri \nJane Sima")
 			.setCancelable(true)
 			.setNeutralButton("Close", new DialogInterface.OnClickListener() {				
 				@Override
@@ -51,7 +51,9 @@ public class HelpButton {
 			.setMessage("Setting Up a Game:\nIn the gallery, scroll to the deck you wish to play. "
 					+ "Click 'Start Game' and choose your game mode. Time challenge has 30 second limit."
 					+ "\n\nPlaying a Game:\nClick the microphone button and say what you see in the image."
-					+ "\n\nCreating New Cards/Decks:\nblah")
+					+ "\n\nEditing Cards and Decks:\nIn the gallery, scroll to the deck you wish to edit, or create a new deck."
+					+ " Click 'Edit' to delete individual cards or the entire deck. New cards can be added by taking a new "
+					+ "picture with the device's camera or adding an existing image from the device.")
 			.setCancelable(true)
 			.setNeutralButton("Close", new DialogInterface.OnClickListener() {				
 				@Override

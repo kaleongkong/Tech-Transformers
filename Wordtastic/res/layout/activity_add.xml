@@ -137,6 +137,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="onClickAddNew"
         style="@style/btnStyleOrange"
+        android:layout_marginLeft="15dp"
         android:text="Add New Picture" />
 
     <ImageButton
@@ -169,10 +170,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/edit"
-        android:layout_marginLeft="225dp"
+        android:layout_marginLeft="175dp"
         android:visibility="gone"
         android:onClick="onClickClearButton"
-        android:text="Clear" />
+        android:text="Delete Deck" />
 
     <Button
         android:id="@+id/edit"
@@ -182,7 +183,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="15dp"
-        android:layout_marginRight="26dp"
+        android:layout_marginRight="15dp"
         android:onClick="onClickEditButton"
         android:text="Edit" />
 
@@ -194,6 +195,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="onClickDoneButton"
+        android:layout_marginRight="15dp"
         android:text="Done"
         android:visibility="gone" />
 

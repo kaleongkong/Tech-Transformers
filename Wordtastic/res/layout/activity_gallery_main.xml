@@ -30,7 +30,7 @@
         android:layout_alignParentRight="true"
         android:onClick="onClickNewDeck"
         style="@style/btnStyleOrange"
-        android:text="new deck" />
+        android:text="New Deck" />
 
     <Button
         android:id="@+id/editdeck"
@@ -40,7 +40,7 @@
         android:layout_alignParentLeft="true"
         android:onClick="onClickEditDeck"
         style="@style/btnStyleOrange"
-        android:text="edit deck" />
+        android:text="Edit Deck" />
 
     <TextView
         android:id="@+id/deckname"

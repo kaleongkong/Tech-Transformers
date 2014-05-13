@@ -52,6 +52,9 @@ public class AddActivity extends Activity {
 	AlertDialog.Builder deleteCardAlertDialogBuilder;
 	TextView dialogtitle;
 	
+	//JANE:
+	ArrayList<ImageButton> deleteIconList;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,18 @@ public class AddActivity extends Activity {
         outerlayout = (LinearLayout)findViewById(R.id.scrollviewlayout);
         setup();
         
+        /*
         
+        //JANE:
+        deleteIconList = new ArrayList<ImageButton>();
+        for(int i=0; i<imglist.size(); i++){
+            ImageButton delete = new ImageButton(this);
+            delete.setImageDrawable(getResources().getDrawable(R.drawable.delete));
+            delete.setVisibility(View.INVISIBLE);
+        	deleteIconList.add(delete);
+        }
+        //END
+        */
         
         title = (TextView) findViewById(R.id.deck);
         addnew = (Button) findViewById(R.id.add_new);
@@ -102,52 +116,24 @@ public class AddActivity extends Activity {
 	        textView.setPadding(150, 50, 0, 0);
 	        textView.setTextSize(20);
 	        FontModifier.initTypeface(getAssets(), textView);
-	        outerlayout.addView(innerlayout1);
-	        innerlayout1.addView(image1);
-	        innerlayout1.addView(textView);
-	        i++;
 	        
 	        /*
-	        //SETTING UP DIALOG BOX FOR EACH IMAGE BUTTON
-	        image1.setOnClickListener(new OnClickListener() {
-	        	
-	        	@Override
-	        	public void onClick(View v)
-	        	{
-	        		deleteCardAlertDialogBuilder = new AlertDialog.Builder(AddActivity.this);
-
-	        		// set title
-	            	dialogtitle = new TextView(AddActivity.this);
-	            	dialogtitle.setText("Would you like to delete this card?");
-	        		//alertDialogBuilder.setTitle("Add New Picture");
-	            	FontModifier.initTypeface(getAssets(), dialogtitle);
-	            	deleteCardAlertDialogBuilder.setCustomTitle(dialogtitle);
-	        		//alertDialogBuilder.setT
-	        			// set dialog message
-	            	deleteCardAlertDialogBuilder
-	        			//.setMessage("Add New Picture")
-	        			.setCancelable(true)
-	        			.setPositiveButton("Cancel",new DialogInterface.OnClickListener() {
-	        				public void onClick(DialogInterface dialog,int id) {
-	        					//Intent i = new Intent(AddActivity.this, CameraPreview.class);
-	        					//i.putExtra("deck_theme", theme);
-	        			    	//startActivity(i);
-	        					dialog.cancel();
-	        				}
-	        			  })
-	        			.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
-	        				public void onClick(DialogInterface dialog,int id) {
-	        					//STUFF TO REMOVE CARD GETS PUT HERE	        					
-	        				}
-	        			});
-	            	
-	        			// create and show alert dialog
-	        			AlertDialog alertDialog = deleteCardAlertDialogBuilder.create();
-	        			alertDialog.show();
-	        		
-	        	}//end onClick
-	        });//end setOnClickListener
+	      //JANE:
+	        ImageButton delete1 = deleteIconList.get(i);
+	        delete1.setOnClickListener(new deleteClickListener(i, image1, textView));	
+	        // END
 	        */
+	        outerlayout.addView(innerlayout1);
+	        innerlayout1.addView(image1);
+	        
+	        /*
+	        //JANE
+	        innerlayout1.addView(delete1);
+	        */
+	        
+	        
+	        innerlayout1.addView(textView);
+	        i++;
 	        
         }//end for loop
     }//end setup method
@@ -177,8 +163,8 @@ public class AddActivity extends Activity {
     	TextView dialogtitle = new TextView(this);
     	dialogtitle.setText("Add New Picture");
 		//alertDialogBuilder.setTitle("Add New Picture");
-    	FontModifier.initTypeface(getAssets(),dialogtitle);
-    	alertDialogBuilder.setCustomTitle(dialogtitle);
+    	//FontModifier.initTypeface(getAssets(),dialogtitle);
+    	//alertDialogBuilder.setCustomTitle(dialogtitle);
 		//alertDialogBuilder.setT
 			// set dialog message
 		alertDialogBuilder
@@ -203,7 +189,6 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
-<<<<<<< HEAD
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -218,27 +203,17 @@ public class AddActivity extends Activity {
          	   //imgv.setImageBitmap(mBitmap); //don't need this
          	   
          	  //Bitmap bmp = intent.getExtras().get("data");
-         	  Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+         	  //Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
          	  ByteArrayOutputStream stream = new ByteArrayOutputStream();
-         	  bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+         	  mBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
          	  byte[] byteArray = stream.toByteArray();
          	   
-         	   /*
+         	   
          	   //CONVERT TO BYTE ARRAY AND PUT ALL THAT TRY CATCH STUFF FROM CAMERAPREVIEW IN HERE
          	   OutputStream fileOutputStream = getContentResolver().openOutputStream(chosenImageUri);
-         	   fileOutputStream.write(data);
+         	   fileOutputStream.write(byteArray);
         	   fileOutputStream.flush();
-        	   fileOutputStream.close();
-        	   */
-         	   
-         	   /*
-         	   Log.v("uri path", pictureUri.getPath());
-         	   OutputStream fileOutputStream = getContentResolver().openOutputStream(pictureUri);
-         	   fileOutputStream.write(data);
-         	   fileOutputStream.flush();
-         	   fileOutputStream.close();
-         	   */
-         	   
+        	   fileOutputStream.close();	   
          	   
  		   } catch (FileNotFoundException e) {
  				// TODO Auto-generated catch block
@@ -251,13 +226,13 @@ public class AddActivity extends Activity {
 				e.printStackTrace();
  		   }
             
-           /*
-            * Intent previous = getIntent();
-		         	Intent i = new Intent(c, addpic3.class);
-		         	i.putExtra("pictureUri", pictureUri.toString());
-		         	i.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
-					c.startActivity(i);
-            */
+       
+           Intent previous = getIntent();
+		   Intent i = new Intent(this, addpic3.class);
+		   i.putExtra("pictureUri", chosenImageUri.toString());
+		   i.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
+		   this.startActivity(i);
+            
         }
     }
     
@@ -276,34 +251,88 @@ public class AddActivity extends Activity {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
     
-    
-=======
+
 	public void openSettings(View v){
 		HelpButton.openSettings(v, this);
 	}
-	
->>>>>>> b30240906fe74cd3a19a8c516ce06c24c796523e
+
     public void onClickHomeButton(View v){
-		Intent i = new Intent(this, GalleryActivity.class);
-		this.startActivity(i);
+		backToGallery();
 	}
     
     public void onClickEditButton(View v){
+//    	done.setVisibility(View.VISIBLE);
+//    	clear.setVisibility(View.VISIBLE);
+//    	edit.setVisibility(View.GONE);
+    	
     	done.setVisibility(View.VISIBLE);
-    	clear.setVisibility(View.VISIBLE);
-    	edit.setVisibility(View.GONE);
+        clear.setVisibility(View.VISIBLE);
+        
+        /*
+        for (ImageButton b: deleteIconList){
+            if (b.getVisibility()==View.INVISIBLE){
+                b.setVisibility(View.VISIBLE);
+            }
+        }
+        */
+        edit.setVisibility(View.GONE);
     }
 
     public void onClickDoneButton(View v){
+//    	done.setVisibility(View.GONE);
+//    	clear.setVisibility(View.GONE);
+//    	edit.setVisibility(View.VISIBLE);
+    	
     	done.setVisibility(View.GONE);
-    	clear.setVisibility(View.GONE);
-    	edit.setVisibility(View.VISIBLE);
+        clear.setVisibility(View.GONE);
+        edit.setVisibility(View.VISIBLE);
+        /*
+        for (ImageButton b: deleteIconList){
+            if (b.getVisibility()==View.VISIBLE){
+                b.setVisibility(View.INVISIBLE);
+            }
+        }
+        */
     }
     
     public void onClickClearButton(View v){
     	//DELETE THE DECK HERE
-    	//THIS ISNT CORRECT IS IT?!?!?!
     	hspmap.deleteDeck(theme);
+    	backToGallery();
+    }
+    
+    private void backToGallery(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+    	
+    }
+    
+    public class deleteClickListener implements OnClickListener{
+    	int index;
+    	ImageButton image;
+    	TextView label;
+    	
+    	public deleteClickListener(int ind, ImageButton b, TextView t){
+    		index = ind;
+    		image = b;
+    		label = t;
+    	}
+    	
+    	@Override
+    	public void onClick(View v) {
+    		v.setVisibility(View.GONE);
+    		image.setVisibility(View.GONE);
+    		label.setVisibility(View.GONE);
+    		
+			hspmap.deleteCard(theme, vocab_dict.get(index));
+			deleteIconList.remove(v);
+			/*imglist.remove(index);
+			vocab_dict.remove(index);
+			*/
+			
+
+
+        }//end deleteClickListener
     	
     }
     

@@ -41,15 +41,17 @@
         style="@style/btnStyleOrange"
         android:text="Home" />
 
+    <!--  
     <Button
         android:id="@+id/gameplaystats_restart"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="onClickRestart"
         style="@style/btnStyleOrange"
-        android:text="Start another game" />
+        android:text="Replay" />
+        -->
 
     <TextView
         android:id="@+id/gameplaystats_title"

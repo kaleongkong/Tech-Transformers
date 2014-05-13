@@ -109,6 +109,18 @@ public class HashSharedPreferenceMap {
 		return sharedStringPreferences.getString(key, "This card doesn't exist");
 	}
 	
+//	public void deleteDeck(String deck){ //delete deck
+//		String key = DECKHEADER+deck;
+//		Set<String> cardnames = getAllCardNamesInDeck(deck);
+//		for(String cardname:cardnames){
+//			deleteCard(deck, cardname);
+//		}
+//		Set<String> decknames = getAllDeckNames();
+//		decknames.remove(deck);
+//		savePreferences(rootdeck,decknames);
+//		deletePreferences(key);
+//	}
+	
 	public void deleteDeck(String deck){ //delete deck
 		String key = DECKHEADER+deck;
 		Set<String> cardnames = getAllCardNamesInDeck(deck);
@@ -116,13 +128,39 @@ public class HashSharedPreferenceMap {
 			deleteCard(deck, cardname);
 		}
 		Set<String> decknames = getAllDeckNames();
-		decknames.remove(key);//CHANGED TO KEY FROM DECK
-		savePreferences(rootdeck,decknames);
+		decknames.remove(deck);
+		deletePreferences(rootdeck);
+		for(String d: decknames){
+			try {
+				saveDeckNamePreferences(d);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		deletePreferences(key);
 	}
 	
+//	public void deleteCard(String deck, String card){ //delete card
+//		String key = DECKHEADER+deck+"_"+card;
+//		deletePreferences(key);
+//	}
+	
 	public void deleteCard(String deck, String card){ //delete card
 		String key = DECKHEADER+deck+"_"+card;
+		Set<String> cardnames = getAllCardNamesInDeck(deck);
+		cardnames.remove(card);
+		//********
+		savePreferences(DECKHEADER+deck, new HashSet<String>());
+		//********
+		for(String c: cardnames){
+			try {
+					saveCardNamePreferences(deck,c);
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+		}
+		
 		deletePreferences(key);
 	}
 	

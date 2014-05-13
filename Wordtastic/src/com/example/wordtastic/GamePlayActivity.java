@@ -268,7 +268,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	public void proceedNextRound(){
 		incorrecttext.setVisibility(View.GONE);
 		int next = imglist.indexOf(currentimg)+1;
-		ques_num.setText("Question"+ Integer.valueOf(next+1).toString());
+		ques_num.setText("Question "+ Integer.valueOf(next+1).toString());
 		if(next<imglist.size()){
 			currentimg = imglist.get(next);
 			iv.setImageDrawable(currentimg);
