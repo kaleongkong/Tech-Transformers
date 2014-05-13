@@ -129,6 +129,7 @@ public class HashSharedPreferenceMap {
 		}
 		Set<String> decknames = getAllDeckNames();
 		decknames.remove(deck);
+
 		deletePreferences(rootdeck);
 		for(String d: decknames){
 			try {
@@ -137,6 +138,9 @@ public class HashSharedPreferenceMap {
 				e.printStackTrace();
 			}
 		}
+
+		savePreferences(rootdeck,decknames);
+
 		deletePreferences(key);
 	}
 	

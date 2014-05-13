@@ -189,6 +189,7 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -256,8 +257,10 @@ public class AddActivity extends Activity {
 		HelpButton.openSettings(v, this);
 	}
 
+	
+
     public void onClickHomeButton(View v){
-		backToGallery();
+    	backToGallery();
 	}
     
     public void onClickEditButton(View v){
@@ -333,6 +336,7 @@ public class AddActivity extends Activity {
 
 
         }//end deleteClickListener
+
     	
     }
     
