@@ -13,10 +13,10 @@
         android:id="@+id/gameplaystats_timeused"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gameplaystats_score"
-        android:layout_alignLeft="@+id/gameplaystats_restart"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="23dp"
+        
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="180dp"
         android:text="Time Used"
         android:textSize="15dp" />
 
@@ -24,9 +24,9 @@
         android:id="@+id/gameplaystats_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gameplaystats_restart"
-        android:layout_alignLeft="@+id/gameplaystats_timeused"
-        android:layout_marginBottom="17dp"
+        android:layout_below="@+id/gameplaystats_timeused"
+        android:layout_marginLeft="110dp"
+        android:layout_marginBottom="50dp"
         android:text="Score"
         android:textSize="15dp" />
 
@@ -34,9 +34,8 @@
         android:id="@+id/gameplaystats_home"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gameplaystats_restart"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="290dp"
         android:onClick="onClickHome"
         style="@style/btnStyleOrange"
         android:text="Home" />
@@ -57,9 +56,9 @@
         android:id="@+id/gameplaystats_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gameplaystats_timeused"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="100dp"
         android:text="Result"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30dp" />

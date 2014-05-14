@@ -2,7 +2,6 @@
   <group android:id="@+id/group_popupmenu">
       <item android:id="@+id/menu1"
           android:title="Instructions"/>
-      <item android:id="@+id/menu2"
-          android:title="About"/>
+s
   </group>
 </menu>

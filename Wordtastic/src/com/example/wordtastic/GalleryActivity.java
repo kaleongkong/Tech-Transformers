@@ -198,7 +198,7 @@ public class GalleryActivity extends Activity{
    			Log.v("id", String.valueOf(arg2));
    			selected = arg2;
    			setlecteddeck = decknamelist.get(selected);
-   			deckname.setText("Current Deck: "+setlecteddeck);
+   			deckname.setText("Current Deck: "+ setlecteddeck);
    		}
 
    		@Override
@@ -220,4 +220,9 @@ public class GalleryActivity extends Activity{
         l.addView(coverFlow, lp);
         
     }
+	
+	public void onBackPressed(){
+		Intent i = new Intent(this, Wordtastic_MainActivity.class);
+		this.startActivity(i);
+	}
 }

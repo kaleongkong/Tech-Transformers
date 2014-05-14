@@ -19,7 +19,7 @@ public class GamePlayStatsActivity extends Activity{
 		timeused = (TextView)findViewById(R.id.gameplaystats_timeused);
 		score = (TextView)findViewById(R.id.gameplaystats_score);
 		home = (Button) findViewById(R.id.gameplaystats_home);
-		restart = (Button)findViewById(R.id.gameplaystats_restart);
+		//restart = (Button)findViewById(R.id.gameplaystats_restart);
 		
 		timeChallenge = getIntent().getExtras().getBoolean("timeChallenge");
 		if(timeChallenge){
@@ -31,7 +31,7 @@ public class GamePlayStatsActivity extends Activity{
 		FontModifier.initTypeface(getAssets(), timeused);
 		FontModifier.initTypeface(getAssets(), score);
 		FontModifier.initTypeface(getAssets(), home);
-		FontModifier.initTypeface(getAssets(), restart);
+		//FontModifier.initTypeface(getAssets(), restart);
 	}
 	/*
 	public void onClickRestart(View v){
@@ -50,5 +50,9 @@ public class GamePlayStatsActivity extends Activity{
 		score = null;
 		home = null;
 		restart =null;
+	}
+	public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
 	}
 }

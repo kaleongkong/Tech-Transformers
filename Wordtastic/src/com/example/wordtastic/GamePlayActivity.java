@@ -82,6 +82,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		
 		voice = (ImageButton) findViewById(R.id.soundinput);
 
+		/*
 		//flashing animation
 		final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
 	    animation.setDuration(500); // duration - half a second
@@ -89,7 +90,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	    animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
 	    animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
 	    voice.startAnimation(animation);
-		
+		*/
 		
 		skip = (Button) findViewById(R.id.skip);
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -299,7 +300,7 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		
 		checkAnswer();
 		
-		v.clearAnimation();
+		//v.clearAnimation();
 	}
 	public void checkAnswer(){
 		if(results == null || results.size()==0){
@@ -415,5 +416,11 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		cardnamelist= null;
 		cardlocationlist= null;
 		imglist= null;
+	}
+	
+	public void onBackPressed(){
+		Intent i = new Intent(this, ChooseGameMode.class);
+		i.putExtra("deck_theme", theme);
+		this.startActivity(i);
 	}
 }

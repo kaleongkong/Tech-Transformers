@@ -106,4 +106,8 @@ public class addpic5 extends Activity {
 		iv = null;
 		pictureUri = null;
 	}
+	public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 }

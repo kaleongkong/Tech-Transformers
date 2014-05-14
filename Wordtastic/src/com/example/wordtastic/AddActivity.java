@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -64,20 +65,22 @@ public class AddActivity extends Activity {
     	vocab_dict = new ArrayList<String>();
         loadImgs();
         outerlayout = (LinearLayout)findViewById(R.id.scrollviewlayout);
-        setup();
+       
         
-        /*
+        
         
         //JANE:
         deleteIconList = new ArrayList<ImageButton>();
+        
         for(int i=0; i<imglist.size(); i++){
             ImageButton delete = new ImageButton(this);
             delete.setImageDrawable(getResources().getDrawable(R.drawable.delete));
             delete.setVisibility(View.INVISIBLE);
         	deleteIconList.add(delete);
         }
+        setup();
         //END
-        */
+        
         
         title = (TextView) findViewById(R.id.deck);
         addnew = (Button) findViewById(R.id.add_new);
@@ -113,23 +116,23 @@ public class AddActivity extends Activity {
 	        image1.setBackground(null);
 	        TextView textView = new TextView(this);
 	        textView.setText(vocab_dict.get(i));
-	        textView.setPadding(150, 50, 0, 0);
+	        textView.setPadding(10, 50, 0, 0);
 	        textView.setTextSize(20);
 	        FontModifier.initTypeface(getAssets(), textView);
 	        
-	        /*
+	        
 	      //JANE:
 	        ImageButton delete1 = deleteIconList.get(i);
 	        delete1.setOnClickListener(new deleteClickListener(i, image1, textView));	
 	        // END
-	        */
+	        
 	        outerlayout.addView(innerlayout1);
 	        innerlayout1.addView(image1);
 	        
-	        /*
+	        
 	        //JANE
 	        innerlayout1.addView(delete1);
-	        */
+	        
 	        
 	        
 	        innerlayout1.addView(textView);
@@ -153,22 +156,15 @@ public class AddActivity extends Activity {
 		}
 	}
     public void onClickAddNew(View v){
-    	/*
-    	Intent i = new Intent(this, AddCardActivity.class);
-    	startActivity(i);
-    	*/
+    	
     	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
 		// set title
-    	TextView dialogtitle = new TextView(this);
-    	dialogtitle.setText("Add New Picture");
-		//alertDialogBuilder.setTitle("Add New Picture");
-    	//FontModifier.initTypeface(getAssets(),dialogtitle);
-    	//alertDialogBuilder.setCustomTitle(dialogtitle);
-		//alertDialogBuilder.setT
-			// set dialog message
+    	//TextView dialogtitle = new TextView(this);
+    	//dialogtitle.setText("Add New Picture");
+		
 		alertDialogBuilder
-			//.setMessage("Add New Picture")
+			.setTitle("Add New Picture")
 			.setCancelable(true)
 			.setPositiveButton("Take a New Picture",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
@@ -189,6 +185,13 @@ public class AddActivity extends Activity {
 			alertDialog.show();
     }
     
+    
+    private Bitmap rotateBitmap90(Bitmap bm){
+		Matrix matrix = new Matrix();
+		matrix.postRotate(90);
+		return Bitmap.createBitmap(bm , 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+	}
+    
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -200,11 +203,14 @@ public class AddActivity extends Activity {
             Bitmap mBitmap = null;
             try {
          	   mBitmap = Media.getBitmap(this.getContentResolver(), chosenImageUri);
-         	   mBitmap = getResizedBitmap(mBitmap, 1000);
-         	   //imgv.setImageBitmap(mBitmap); //don't need this
          	   
-         	  //Bitmap bmp = intent.getExtras().get("data");
-         	  //Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+         	   //THIS ROTATES THE BITMAP. LETS SEE IF THIS WORKS
+         	   rotateBitmap90(mBitmap);
+         	   
+         	   mBitmap = getResizedBitmap(mBitmap, 1000);
+         	   
+         	  
+         	   
          	  ByteArrayOutputStream stream = new ByteArrayOutputStream();
          	  mBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
          	  byte[] byteArray = stream.toByteArray();
@@ -271,13 +277,13 @@ public class AddActivity extends Activity {
     	done.setVisibility(View.VISIBLE);
         clear.setVisibility(View.VISIBLE);
         
-        /*
+        
         for (ImageButton b: deleteIconList){
             if (b.getVisibility()==View.INVISIBLE){
                 b.setVisibility(View.VISIBLE);
             }
         }
-        */
+        
         edit.setVisibility(View.GONE);
     }
 
@@ -289,13 +295,13 @@ public class AddActivity extends Activity {
     	done.setVisibility(View.GONE);
         clear.setVisibility(View.GONE);
         edit.setVisibility(View.VISIBLE);
-        /*
+        
         for (ImageButton b: deleteIconList){
             if (b.getVisibility()==View.VISIBLE){
                 b.setVisibility(View.INVISIBLE);
             }
         }
-        */
+        
     }
     
     public void onClickClearButton(View v){
@@ -339,5 +345,10 @@ public class AddActivity extends Activity {
 
     	
     }
+    
+    public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
     
 }

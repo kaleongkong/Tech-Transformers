@@ -109,5 +109,9 @@ public class addpic4 extends Activity {
 		hspm = null;
 		ilsh = null;
 	}
+	public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 
 }

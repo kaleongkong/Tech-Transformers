@@ -52,4 +52,8 @@ public class ChooseGameMode extends Activity{
 		i.putExtra("timeChallenge", false);
 		this.startActivity(i);
 	}
+	public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
+	}
 }

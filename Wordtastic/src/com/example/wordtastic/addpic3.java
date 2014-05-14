@@ -60,6 +60,12 @@ public class addpic3<MainActivity> extends Activity {
 		Intent i = new Intent(this, GalleryActivity.class);
 		this.startActivity(i);
 	}
+	public void onClickRetakeButton(View v){
+		Intent i = new Intent(this, CameraPreview.class);
+		Intent previous = getIntent();
+		i.putExtra("deck_theme", previous.getStringExtra("deck_theme"));
+		this.startActivity(i);
+	}
 	
 	public void openSettings(View v){
 		HelpButton.openSettings(v, this);
@@ -101,6 +107,10 @@ public class addpic3<MainActivity> extends Activity {
 	    takenCameraImage = null;
 		iv = null;
 		pictureUri = null;
+	}
+	public void onBackPressed(){
+    	Intent i = new Intent(this, GalleryActivity.class);
+		this.startActivity(i);
 	}
 }
 

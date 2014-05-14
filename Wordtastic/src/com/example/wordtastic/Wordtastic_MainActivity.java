@@ -51,8 +51,8 @@ public class Wordtastic_MainActivity extends Activity {
 		setupDeck("fruits", drawableImgFruits, cardNameFruits);
 		setupDeck("places", drawableImgPlaces, cardNamePlaces);
 		setupDeck("plants", drawableImgPlants, cardNamePlants);
-		setupDeck("furnitures", drawableImgFurnitures, cardNameFurnitures);
-		setupDeck("alphabets", drawableImgAlphabets, cardNameAlphabets);
+		setupDeck("furniture", drawableImgFurnitures, cardNameFurnitures);
+		setupDeck("alphabet", drawableImgAlphabets, cardNameAlphabets);
 	}
 	private void setupDeck(String theme, int[] drawableImg, String[] cardname){
 		
