@@ -1,4 +1,4 @@
-package com.example.wordtastic;
+package com.wordtastic.wordtastic;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;

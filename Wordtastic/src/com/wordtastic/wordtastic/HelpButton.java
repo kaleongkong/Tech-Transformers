@@ -1,4 +1,4 @@
-package com.example.wordtastic;
+package com.wordtastic.wordtastic;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

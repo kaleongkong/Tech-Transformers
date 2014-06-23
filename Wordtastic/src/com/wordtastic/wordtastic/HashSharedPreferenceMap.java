@@ -1,4 +1,4 @@
-package com.example.wordtastic;
+package com.wordtastic.wordtastic;
 
 import java.util.HashMap;
 import java.util.HashSet;

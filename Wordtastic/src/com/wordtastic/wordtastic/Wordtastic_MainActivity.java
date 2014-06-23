@@ -1,6 +1,5 @@
 package com.wordtastic.wordtastic;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +28,7 @@ public class Wordtastic_MainActivity extends Activity {
 		hspmap = new HashSharedPreferenceMap(this);
 		//if(hspmap.getAllCardNamesInDeck("animal").size()==0){
 		    
-			//hspmap.clearAll(); //COMMENT OUT ONCE THE ENTIRE PROJECT IS FINISHED!
+			hspmap.clearAll(); //COMMENT OUT ONCE THE ENTIRE PROJECT IS FINISHED!
 			setup();
 		//}
 		//Log.v("deck card name list", hspmap.getAllCardNamesInDeck("animal").toString());
@@ -37,20 +36,20 @@ public class Wordtastic_MainActivity extends Activity {
 	
 	private void setup(){
 		int[] drawableImgAnimal = {R.drawable.duck, R.drawable.squirrel, R.drawable.cat, R.drawable.lion, R.drawable.monkey, R.drawable.chicken};
-		String[] cardNameAnimal = {"duck","squirrel","cat","lion","monkey","hen"};
-		/*int[] drawableImgFruits = {R.drawable.fruitbowl};
-		String[] cardNameFruits = {"fruit"};
+		String[] cardNameAnimal = {"duck","squirrel","cat","lion","monkey","chicken"};
+		int[] drawableImgFruits = {R.drawable.fruitbowl};
+		String[] cardNameFruits = {"fruits"};
 		int[] drawableImgPlaces = {R.drawable.globe_cartoon};
-		String[] cardNamePlaces = {"earth"};*/
+		String[] cardNamePlaces = {"places"};
 		int[] drawableImgPlants = {R.drawable.tree};
 		String[] cardNamePlants = {"tree"};
 		int[] drawableImgFurnitures = {R.drawable.table};
 		String[] cardNameFurnitures = {"table"};
 		int[] drawableImgAlphabets = {R.drawable.abcblocks};
-		String[] cardNameAlphabets = {"alphabet"};
+		String[] cardNameAlphabets = {"alphabets"};
 		setupDeck("animals", drawableImgAnimal, cardNameAnimal);
-		/*setupDeck("fruits", drawableImgFruits, cardNameFruits);
-		setupDeck("places", drawableImgPlaces, cardNamePlaces);*/
+		setupDeck("fruits", drawableImgFruits, cardNameFruits);
+		setupDeck("places", drawableImgPlaces, cardNamePlaces);
 		setupDeck("plants", drawableImgPlants, cardNamePlants);
 		setupDeck("furniture", drawableImgFurnitures, cardNameFurnitures);
 		setupDeck("alphabet", drawableImgAlphabets, cardNameAlphabets);

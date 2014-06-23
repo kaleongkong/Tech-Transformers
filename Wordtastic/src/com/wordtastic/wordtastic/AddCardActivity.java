@@ -1,4 +1,4 @@
-package com.example.wordtastic;
+package com.wordtastic.wordtastic;
 
 import android.app.Activity;
 import android.content.Intent;

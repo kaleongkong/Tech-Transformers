@@ -36,7 +36,6 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 	TextView timer;
 	TextView scoreView;
 	TextView incorrecttext;
-	TextView mode;
 	//ArrayList<Drawable> images;
 	ArrayList<String> results;
 	ArrayList<String> vocab_dict;
@@ -83,6 +82,15 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		
 		voice = (ImageButton) findViewById(R.id.soundinput);
 
+		/*
+		//flashing animation
+		final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+	    animation.setDuration(500); // duration - half a second
+	    animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+	    animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
+	    animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+	    voice.startAnimation(animation);
+		*/
 		
 		skip = (Button) findViewById(R.id.skip);
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -94,7 +102,6 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 		mSpeechRecognizer.setRecognitionListener(this);
 		speaktext = (TextView) findViewById(R.id.speaktext);
-		mode = (TextView) findViewById(R.id.mode);
 		//*** timer
 		timer = (TextView) findViewById(R.id.time);
 		time = timelimit;
@@ -181,9 +188,6 @@ public class GamePlayActivity extends Activity implements RecognitionListener{
 		hspmap = new HashSharedPreferenceMap(this);
 		Intent i = getIntent();
 		timeChallenge = i.getExtras().getBoolean("timeChallenge");
-		if(!timeChallenge){
-			mode.setText("Standard Mode");
-		}
 		theme = i.getStringExtra("deck_theme");
 		cardnamelist.addAll(hspmap.getAllCardNamesInDeck(theme));
 		Log.v("deck card name list", hspmap.getAllCardNamesInDeck(theme).toString());
