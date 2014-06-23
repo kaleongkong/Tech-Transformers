@@ -39,20 +39,20 @@ public class Wordtastic_MainActivity extends Activity {
 		String[] cardNameAnimal = {"duck","squirrel","cat","lion","monkey","chicken"};
 		int[] drawableImgFruits = {R.drawable.fruitbowl};
 		String[] cardNameFruits = {"fruits"};
-		int[] drawableImgPlaces = {R.drawable.globe_cartoon};
-		String[] cardNamePlaces = {"places"};
+		//int[] drawableImgPlaces = {R.drawable.globe_cartoon};
+		//String[] cardNamePlaces = {"places"};
 		int[] drawableImgPlants = {R.drawable.tree};
 		String[] cardNamePlants = {"tree"};
 		int[] drawableImgFurnitures = {R.drawable.table};
 		String[] cardNameFurnitures = {"table"};
-		int[] drawableImgAlphabets = {R.drawable.abcblocks};
-		String[] cardNameAlphabets = {"alphabets"};
+		//int[] drawableImgAlphabets = {R.drawable.abcblocks};
+		//String[] cardNameAlphabets = {"alphabets"};
 		setupDeck("animals", drawableImgAnimal, cardNameAnimal);
 		setupDeck("fruits", drawableImgFruits, cardNameFruits);
-		setupDeck("places", drawableImgPlaces, cardNamePlaces);
+		//setupDeck("places", drawableImgPlaces, cardNamePlaces);
 		setupDeck("plants", drawableImgPlants, cardNamePlants);
 		setupDeck("furniture", drawableImgFurnitures, cardNameFurnitures);
-		setupDeck("alphabet", drawableImgAlphabets, cardNameAlphabets);
+		//setupDeck("alphabet", drawableImgAlphabets, cardNameAlphabets);
 	}
 	private void setupDeck(String theme, int[] drawableImg, String[] cardname){
 		

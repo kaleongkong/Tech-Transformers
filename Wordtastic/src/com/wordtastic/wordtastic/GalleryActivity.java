@@ -60,7 +60,7 @@ public class GalleryActivity extends Activity{
 		ImageButton home = (ImageButton)findViewById(R.id.homeButton);
 		Button newdeck = (Button) findViewById(R.id.newdeck);
 		Button editdeck = (Button) findViewById(R.id.editdeck);
-		selected =mImageIds.length/2;
+		selected =(mImageIds.length-1)/2;
 		setlecteddeck = decknamelist.get(selected);
 		deckname.setText("Current Deck: "+setlecteddeck);
 		
